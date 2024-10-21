@@ -1,0 +1,258 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+header {
+    background: #121212;
+    color: #fff;
+    padding: 10px 0;
+    text-align: center;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 15px;
+}
+
+nav a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+main {
+    padding: 20px;
+}
+
+h2 {
+    color: #333;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table, th, td {
+    border: 1px solid #ddd;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+button {
+    margin: 10px 0;
+    padding: 10px 15px;
+    background-color: #1f3db4;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #131a45;
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background: #333;
+    color: #fff;
+    position: relative; /* Cambiado para evitar solapamientos con el contenido */
+    bottom: 0;
+    width: 100%;
+}
+
+/* Estilos adicionales para modales */
+.modal {
+    display: none; /* Ocultamos el modal por defecto */
+    position: fixed;
+    z-index: 1; /* Se asegura que esté por encima de otros elementos */
+    left: 0;
+    top: 0;
+    width: 100%; /* Ancho completo */
+    height: 100%; /* Altura completa */
+    overflow: auto; /* Habilita scroll si es necesario */
+    background-color: rgb(0,0,0); /* Color de fondo */
+    background-color: rgba(0,0,0,0.4); /* Fondo oscuro con opacidad */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto; /* Centrar el modal */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Ancho del modal */
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+/* Estilos para el modal de imagen ampliada */
+#imageModal {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    z-index: 1000; /* Aparece sobre otros elementos */
+    left: 0;
+    top: 0;
+    width: 100%; /* Cubre toda la pantalla */
+    height: 100%; /* Cubre toda la pantalla */
+    background-color: rgba(0, 0, 0, 0.8); /* Fondo semi-transparente */
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; /* Oculta el desbordamiento */
+}
+
+#imageModal .modal-content {
+    position: relative;
+    margin: auto;
+    padding: 0;
+    width: 90%; /* O un valor adecuado para el contenedor */
+    max-width: 4000px; /* Limitar el ancho máximo */
+}
+
+#expandedImage {
+    width: 100%;
+    height: auto;
+    max-height: 90vh; /* No más del 90% de la altura de la ventana */
+    max-width: 100%; /* No más del 100% del ancho de la ventana */
+    object-fit: contain; /* La imagen se ajusta manteniendo su relación de aspecto */
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    color: white;
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+}
+/* Estilo para el header */
+header {
+    display: flex; /* Usar Flexbox para alinear los elementos */
+    flex-direction: column; /* Organizar elementos en columnas */
+    justify-content: space-between; /* Espacio entre el contenido del encabezado y la navegación */
+    align-items: center; /* Centrar verticalmente los elementos */
+    padding: 10px; /* Espaciado alrededor del header */
+}
+
+/* Estilo para el logo en el header */
+#headerLogo {
+    width: 100px; /* Ajustar el tamaño según sea necesario */
+    height: auto; /* Mantener la proporción */
+    position: absolute; /* Permitir que se mueva sin afectar otros elementos */
+    left: 10px; /* Ajustar la posición horizontal del logo */
+    margin-top: 1px;
+}
+
+/* Contenido del encabezado */
+.header-content {
+    text-align: center; /* Centrar el texto dentro de su contenedor */
+}
+
+/* Estilo para el título */
+header h1 {
+    margin: 0; /* Eliminar el margen por defecto del h1 */
+}
+
+/* Estilo para la navegación */
+nav {
+    margin-top: 10px; /* Espacio entre el título y la navegación */
+}
+
+nav ul {
+    list-style-type: none; /* Eliminar las viñetas de la lista */
+    padding: 0; /* Eliminar el padding por defecto */
+    display: flex; /* Alinear los enlaces horizontalmente */
+    justify-content: center; /* Centrar los enlaces en la barra de navegación */
+}
+
+nav ul li {
+    margin-right: 15px; /* Espacio entre los enlaces */
+}
+
+nav ul li a {
+    text-decoration: none; /* Eliminar el subrayado de los enlaces */
+}
+
+
+/* Estilo para el Panel de Control */
+#panelControl {
+    margin-top: 30px; /* Espacio superior para separar de secciones anteriores */
+    padding: 15px;
+    background-color: #e9ecef; /* Color de fondo claro para el panel */
+    border-radius: 8px; /* Bordes redondeados para un mejor aspecto */
+}
+
+#maintenanceStats {
+    margin-bottom: 20px; /* Espacio inferior para separar del botón */
+}
+
+#maintenanceStats h3 {
+    margin: 0 0 10px; /* Margen inferior para separar del contenido */
+}
+
+#maintenanceStats p {
+    font-size: 1.1em; /* Aumentar el tamaño de la fuente para destacar */
+}
+
+#viewHistoryBtn {
+    background-color: #007bff; /* Color azul para el botón de historial */
+    padding: 10px 15px;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+#viewHistoryBtn:hover {
+    background-color: #0056b3; /* Color más oscuro al pasar el ratón */
+}
+
+/* Responsividad */
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 1.5em; /* Tamaño de fuente más pequeño para móviles */
+    }
+
+    nav ul {
+        flex-direction: column; /* Navegación vertical en dispositivos móviles */
+        align-items: center; /* Centrando los elementos */
+    }
+
+    nav ul li {
+        margin: 5px 0; /* Espacio entre los elementos de la navegación */
+    }
+
+    table {
+        font-size: 0.9em; /* Tamaño de fuente más pequeño en móviles */
+    }
+
+    button {
+        width: 100%; /* Botones ocupan el ancho completo en móviles */
+    }
+}
+
+
+
+/* Estilo para el login*/
