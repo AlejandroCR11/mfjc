@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recuperar Contraseña</title>
+    <!-- icono -->
+    <link rel="shortcut icon" href="img/logo.png">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .reset-container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+        .reset-container h1 {
+            margin-bottom: 1.5rem;
+        }
+        .reset-container input {
+            width: 100%;
+            padding: 0.8rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .reset-container button {
+            background-color: #007BFF;
+            color: white;
+            padding: 0.8rem;
+            border: none;
+            width: 100%;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .reset-container button:hover {
+            background-color: #0056b3;
+        }
+        .reset-container a {
+            display: block;
+            margin-top: 1.5rem;
+            color: #007BFF;
+            text-decoration: none;
+        }
+        .reset-container a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<div class="reset-container">
+    <h1>Recuperar Contraseña</h1>
+    <p>Introduce tu dirección de correo electrónico y te enviaremos un enlace para restablecer tu contraseña.</p>
+    <form id="resetForm">
+        <input type="email" id="email" placeholder="Correo electrónico" required>
+        <button type="submit">Enviar enlace</button>
+    </form>
+    <a href="login.html">Volver al inicio de sesión</a>
+</div>
+
+<script>
+    document.getElementById('resetForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const email = document.getElementById('email').value;
+
+        // Realizar la solicitud POST al servidor para enviar el correo
+        fetch('/enviar-codigo', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email: email }) // Enviar el correo electrónico en el cuerpo de la solicitud
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                alert(`Se ha enviado un enlace de recuperación a: ${email}`);
+            } else {
+                alert('Error al enviar el enlace. Por favor, intenta de nuevo.');
+            }
+        })
+        .catch(error => {
+            console.error('Error al enviar la solicitud:', error);
+            alert('Hubo un problema con la solicitud. Intenta nuevamente.');
+        });
+    });
+    src="login.js"
+</script>
+
+</body>
+</html>

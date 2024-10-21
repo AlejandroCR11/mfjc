@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Mantenimiento</title>
+    <!-- icono -->
+    <link rel="shortcut icon" href="img/logo.png">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <img src="img/logo.png" alt="Logo" id="headerLogo">
+        <div class="header-content">
+            <h1>Gestión de Mantenimiento de Equipos</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#calendario">Calendario de Mantenimiento</a></li>
+                <li><a href="#equipos">Equipos</a></li>
+                <li><a href="#inventario">Inventario de Repuestos</a></li>
+                <li><a href="#reportes">Reportes</a></li>
+                <li><a href="#panelControl">Panel de Control</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="calendario">
+            <h2>Calendario de Mantenimiento</h2>
+            <div id="calendar"></div>
+        </section>
+
+        <section id="equipos">
+            <h2>Lista de Equipos</h2>
+            <button id="addEquipmentBtn">Agregar Equipo</button>
+            <table id="equipmentTable">
+                <thead>
+                    <tr>
+                        <th>Foto</th>
+                        <th>Nombre</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Los equipos se agregarán aquí -->
+                    </div>
+                    
+                </tbody>
+            </table>
+        </section>
+
+        <section id="inventario">
+            <h2>Inventario de Repuestos</h2>
+            <button id="addPartBtn">Agregar Repuesto</button>
+            <table id="partsTable">
+                <thead>
+                    <tr>
+                        <th>Foto</th>
+                        <th>Repuesto</th>
+                        <th>Cantidad</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Los repuestos se agregarán aquí -->
+                     
+                    </div>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="reportes">
+            <h2>Reportes</h2>
+            <button id="generateReportBtn">Generar Reporte</button>
+            <div id="reportOutput"></div>
+        </section>
+
+        <section id="panelControl">
+            <h2>Panel de Control</h2>
+            <div id="maintenanceStats">
+                <h3>Estadísticas de Mantenimiento</h3>
+                <p id="upcomingMaintenanceCount">Mantenimientos Próximos: <span>0</span></p>
+                <p id="overdueMaintenanceCount">Mantenimientos Retrasados: <span>0</span></p>
+            </div>
+            <button id="viewHistoryBtn">Ver Historial de Mantenimientos</button>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2024 Jacinto Convit Foundation. Todos los derechos reservados.</p>
+    </footer>
+
+    <!-- Modal para agregar equipo -->
+    <div id="addEquipmentModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeEquipmentModal">&times;</span>
+            <h2>Agregar Equipo</h2>
+            <label for="equipmentPhoto">Foto (Cargar archivo):</label>
+            <input type="file" id="equipmentPhoto" accept="image/*">
+            <label for="equipmentName">Nombre del Equipo:</label>
+            <input type="text" id="equipmentName" placeholder="Nombre del equipo" required>
+            <button id="submitEquipmentBtn">Agregar Equipo</button>
+        </div>
+    </div>
+
+    <!-- Modal para agregar mantenimiento -->
+    <div id="addMaintenanceModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeMaintenanceModal">&times;</span>
+            <h2>Agregar Mantenimiento</h2>
+            <label for="tipoMantenimiento">Tipo de Mantenimiento:</label>
+            <select id="tipoMantenimiento">
+                <option value="preventivo">Preventivo</option>
+                <option value="correctivo">Correctivo</option>
+            </select>
+            <label for="fechaMantenimiento">Fecha:</label>
+            <input type="date" id="fechaMantenimiento" required>
+            <label for="descripcionMantenimiento">Descripción:</label>
+            <textarea id="descripcionMantenimiento" rows="3" placeholder="Descripción del mantenimiento" required></textarea>
+            <button id="submitMaintenanceBtn">Agregar Mantenimiento</button>
+        </div>
+    </div>
+    
+    <div id="imageModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeImageModal">&times;</span>
+            <img id="expandedImage" src="" alt="Imagen ampliada">
+        </div>
+    </div>
+
+     <!-- Modal para agregar repuesto -->
+    <div id="addPartModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closePartModal">&times;</span>
+            <h2>Agregar Repuesto</h2>
+            <label for="partPhoto">Foto del Repuesto (Cargar archivo):</label>
+            <input type="file" id="partPhoto" accept="image/*">
+            <label for="partName">Nombre del Repuesto:</label>
+            <input type="text" id="partName" placeholder="Nombre del repuesto" required>
+            <label for="partQuantity">Cantidad:</label>
+            <input type="number" id="partQuantity" placeholder="Cantidad" required>
+            <button id="submitPartBtn">Agregar Repuesto</button>
+        </div>
+    </div>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

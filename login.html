@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Sistema de Mantenimiento</title>
+    <!-- icono -->
+    <link rel="shortcut icon" href="img/logo.png">
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .login-container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            display: flex;
+            flex-wrap: wrap;
+            text-align: center;
+        }
+        .login-container h1 {
+            margin-bottom: 2rem;
+        }
+        .login-container input {
+            width: 100%;
+            padding: 0.8rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .login-container button {
+            background-color: #007BFF;
+            color: white;
+            padding: 0.8rem;
+            border: none;
+            width: 100%;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .login-container button:hover {
+            background-color: #0056b3;
+        }
+        .login-container a {
+            display: block;
+            margin-top: 1rem;
+            margin-left: 6rem;
+            color: #007BFF;
+            text-decoration: none;
+        }
+        .login-container a:hover {
+            text-decoration: underline;
+        }
+        .error-message {
+            color: red;
+            margin-bottom: 1rem;
+        }
+
+        .remember-container {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center; /* Alinea el checkbox con el texto en el centro vertical */
+            margin-bottom: 1rem;
+        }
+
+        .remember-container input[type="checkbox"] {
+            margin-top: 1rem;
+            margin-left: 14rem; /* Ajusta el espacio entre el checkbox y el texto */
+        }
+
+        .remember-container label {
+            white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+        }
+
+        /* Nueva sección para el logo e introducción */
+        .header-container {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        .header-container img {
+            width: 244px; /* Ajusta el tamaño de la imagen */
+            height: 244px;
+            margin-bottom: 1rem;
+        }
+        .header-container h2 {
+            margin: 0;
+            font-size: 1.5rem;
+            color: #333;
+        }
+        
+        
+
+    </style>
+</head>
+<body>
+
+    <div class>
+        <div class="header-container">
+            <img src="img/logo.png">
+            <h2>Sistema de control de mantenimiento</h2>
+        </div>
+
+<div class="login-container">
+    <h1>Iniciar Sesión</h1>
+    <form id="loginForm">
+        <input type="text" id="username" placeholder="Usuario o Correo" required>
+        <input type="password" id="password" placeholder="Contraseña" required>
+        <div class="remember-container">
+            <input type="checkbox" id="rememberMe">
+            <label for="rememberMe">Recordar sesión</label>
+        </div>
+        <div class="error-message" id="errorMessage"></div>
+        <button type="submit">Iniciar Sesión</button>
+    </form>
+    <a href="reset-container.html">¿Olvidaste tu contraseña?</a>
+</div>
+<h5>Desarrollador por Alejandro Campo</h5>
+<script src="js/login.js"></script>
+</body>
+</html>
