@@ -6,22 +6,26 @@ document.addEventListener("DOMContentLoaded", () => {
         overdue: 0,
         history: []
     };
-
+    
+    // Modal y botón de agregar equipo
     const addEquipmentModal = document.getElementById("addEquipmentModal");
-    const closeEquipmentModal = document.getElementById("closeEquipmentModal");
     const submitEquipmentBtn = document.getElementById("submitEquipmentBtn");
-    const addPartModal = document.getElementById("addPartModal");
+    const closeEquipmentModal = document.getElementById("closeEquipmentModal");
 
+    // Modal y botón de agregar repuesto
+    const addPartModal = document.getElementById("addPartModal");
+    const submitPartBtn = document.getElementById("submitPartBtn");
+    const closePartModal = document.getElementById("closePartModal");
+    
     const addMaintenanceModal = document.getElementById("addMaintenanceModal");
     const closeMaintenanceModal = document.getElementById("closeMaintenanceModal");
     const submitMaintenanceBtn = document.getElementById("submitMaintenanceBtn");
-    const closePartModal = document.getElementById("closePartModal");
-    const submitPartBtn = document.getElementById("submitPartBtn");
 
     const imageModal = document.getElementById("imageModal");
     const closeImageModal = document.getElementById("closeImageModal");
     const expandedImage = document.getElementById("expandedImage");
 
+    
     document.getElementById("addEquipmentBtn").addEventListener("click", () => {
         addEquipmentModal.style.display = "block";
     });
@@ -60,7 +64,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 
                 photoCell.innerHTML = `<img src="${e.target.result}" alt="${equipmentName}" width="50" height="50" onclick="showImage(this)">`;
                 nameCell.innerText = equipmentName;
-                actionsCell.innerHTML = `<button onclick="showMaintenanceForm(this)">Mantenimiento</button>`;
+                actionsCell.innerHTML = `
+                <button onclick="showMaintenanceForm(this)">Mantenimiento</button>
+                <button onclick="deleteEquipment(this)">Eliminar</button>
+            `;
 
                 addEquipmentModal.style.display = "none"; 
                 equipmentPhotoInput.value = ""; 
@@ -71,7 +78,8 @@ document.addEventListener("DOMContentLoaded", () => {
             alert("Por favor, complete todos los campos obligatorios.");
         }
     });
-
+    
+    
     submitPartBtn.addEventListener("click", () => {
         const partPhotoInput = document.getElementById("partPhoto");
         const partName = document.getElementById("partName").value;
@@ -88,11 +96,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 photoCell.innerHTML = `<img src="${e.target.result}" alt="${partName}" width="50" height="50" onclick="showImage(this)">`;
                 nameCell.innerText = partName;
-                quantityCell.innerText = partQuantity;
-                actionsCell.innerHTML = '<button onclick="deleteRow(this)">Eliminar</button>';
+                quantityCell.innerHTML = `<span class="part-quantity">${partQuantity}</span>`;
+                actionsCell.innerHTML = `
+                    <button onclick="incrementQuantity(this)">+</button>
+                    <button onclick="decrementQuantity(this)">-</button>
+                    <button onclick="deletePart(this)">Eliminar</button>
+                    
+                `;
 
                 addPartModal.style.display = "none";
-
                 partPhotoInput.value = "";
                 document.getElementById("partName").value = "";
                 document.getElementById("partQuantity").value = "";
@@ -102,6 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
             alert("Por favor, complete todos los campos obligatorios.");
         }
     });
+
 
     window.showImage = function(image) {
         expandedImage.src = image.src; 
@@ -114,8 +127,9 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     window.showMaintenanceForm = function(button) {
-        addMaintenanceModal.style.display = "block"; 
+        addMaintenanceModal.style.display = "block"; // Mostrar el modal de mantenimiento
 
+        // Asignar la funcionalidad de agregar mantenimiento al botón del modal
         submitMaintenanceBtn.onclick = function() {
             const tipoMantenimiento = document.getElementById("tipoMantenimiento").value;
             const fechaMantenimiento = document.getElementById("fechaMantenimiento").value;
@@ -128,6 +142,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     descripcion: descripcionMantenimiento
                 });
 
+                // Actualizar estadísticas
                 const today = new Date();
                 if (new Date(fechaMantenimiento) >= today) {
                     maintenanceStats.upcoming++;
@@ -147,11 +162,43 @@ document.addEventListener("DOMContentLoaded", () => {
         };
     };
 
+        // Función para eliminar un equipo
+        window.deleteEquipment = function(button) {
+            const row = button.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+        };
+
+        // Función para incrementar la cantidad del repuesto
+        window.incrementQuantity = function(button) {
+            const quantityCell = button.parentNode.parentNode.cells[2];
+            const quantitySpan = quantityCell.querySelector(".part-quantity");
+            let quantity = parseInt(quantitySpan.innerText);
+            quantitySpan.innerText = ++quantity;
+        };
+    
+        // Función para decrementar la cantidad del repuesto
+        window.decrementQuantity = function(button) {
+            const quantityCell = button.parentNode.parentNode.cells[2];
+            const quantitySpan = quantityCell.querySelector(".part-quantity");
+            let quantity = parseInt(quantitySpan.innerText);
+            if (quantity > 1) {
+                quantitySpan.innerText = --quantity;
+            }
+        };
+    
+        // Función para eliminar un repuesto
+        window.deletePart = function(button) {
+            const row = button.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+        };
+
+    // Actualiza las estadísticas de mantenimiento en el panel de control
     function updateMaintenanceStats() {
         document.querySelector("#upcomingMaintenanceCount span").innerText = maintenanceStats.upcoming;
         document.querySelector("#overdueMaintenanceCount span").innerText = maintenanceStats.overdue;
     }
 
+     // Cerrar los modales al hacer clic fuera de ellos
     window.onclick = function(event) {
         if (event.target === addEquipmentModal) {
             addEquipmentModal.style.display = "none";
@@ -167,6 +214,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     };
 
+    // Función para ver el historial de mantenimientos
     document.getElementById("viewHistoryBtn").addEventListener("click", () => {
         if (maintenanceStats.history.length === 0) {
             alert("No hay historial de mantenimientos.");
@@ -180,3 +228,4 @@ document.addEventListener("DOMContentLoaded", () => {
         alert(historyOutput);
     });
 });
+
