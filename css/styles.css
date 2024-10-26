@@ -1,8 +1,10 @@
 body {
     font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
+    margin: auto;
+    padding: auto;
+    background-color: #ffffff;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 header {
@@ -10,6 +12,7 @@ header {
     color: #fff;
     padding: 10px 0;
     text-align: center;
+
 }
 
 nav ul {
@@ -20,6 +23,7 @@ nav ul {
 nav ul li {
     display: inline;
     margin: 0 15px;
+    margin-top: 40px;
 }
 
 nav a {
@@ -51,16 +55,29 @@ th, td {
 }
 
 button {
-    margin: 10px 0;
-    padding: 10px 15px;
-    background-color: #1f3db4;
-    color: white;
+    background-color: #293a60;
+    color: rgb(242, 242, 242);
     border: none;
+    padding: 0 20px;
+    line-height: 50px;
+    border-radius: 10px;
+    -webkit-box-shadow: -2px 3px 0px #d4d4d4;
+    box-shadow: -2px 3px 0px #d4d4d4;
+    font-size: 14px;
+    font-weight: 600;
     cursor: pointer;
-}
+    -webkit-transition-property: line-height;
+    -o-transition-property: line-height;
+    transition-property: line-height;
+    -webkit-transition-duration: 0.3s;
+    -o-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    
+  }
+
 
 button:hover {
-    background-color: #131a45;
+    background-color: #0b0f2a;
 }
 
 footer {
@@ -70,7 +87,6 @@ footer {
     color: #fff;
     position: relative; /* Cambiado para evitar solapamientos con el contenido */
     bottom: 0;
-    
 }
 
 /* Estilos adicionales para modales */
@@ -163,7 +179,8 @@ header {
     height: auto; /* Mantener la proporción */
     position: absolute; /* Permitir que se mueva sin afectar otros elementos */
     left: 10px; /* Ajustar la posición horizontal del logo */
-    margin-top: 1px;
+    margin-top: 0px;
+    margin-right: auto;
 }
 
 /* Contenido del encabezado */
@@ -254,5 +271,125 @@ nav ul li a {
 }
 
 
+/* Estilo específico para el modal de agregar equipo */
+#addEquipmentModal {
+    display: none; /* Ocultamos el modal por defecto */
+    position: fixed;
+    z-index: 1; /* Se asegura que esté por encima de otros elementos */
+    left: 0;
+    top: 0;
+    width: 100%; /* Ancho completo */
+    height: 100%; /* Altura completa */
+    overflow: auto; /* Habilita scroll si es necesario */
+    background-color: rgba(0, 0, 0, 0.6); /* Fondo oscuro con opacidad */
+}
+
+/* Contenido del modal de agregar equipo */
+#addEquipmentModal .modal-content {
+    background-color: #ffffff; /* Color de fondo blanco */
+    margin: 10% auto; /* Margen superior y centrado */
+    padding: 20px;
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para el efecto de elevación */
+    width: 80%; /* Ancho del modal */
+    max-width: 500px; /* Ancho máximo */
+}
+
+/* Estilos para los títulos dentro del modal */
+#addEquipmentModal h2 {
+    color: #333; /* Color del título */
+    margin-bottom: 20px; /* Espacio inferior */
+}
+
+/* Estilos para las etiquetas de entrada */
+#addEquipmentModal label {
+    display: block; /* Mostrar cada etiqueta en una nueva línea */
+    margin-bottom: 5px; /* Espacio inferior */
+    font-weight: bold; /* Negrita */
+}
+
+/* Estilos para los campos de entrada */
+#addEquipmentModal input[type="text"],
+#addEquipmentModal input[type="number"],
+#addEquipmentModal select {
+    width: calc(100% - 20px); /* Ancho completo menos el padding */
+    padding: 10px; /* Espaciado interno */
+    border: 1px solid #ddd; /* Bordes suaves */
+    border-radius: 4px; /* Bordes redondeados */
+    margin-bottom: 15px; /* Espacio inferior */
+    box-sizing: border-box; /* Incluye padding en el ancho total */
+}
+
+/* Estilos para el botón de agregar */
+#addEquipmentModal .btn-add {
+    background-color: #1f3db4; /* Color del botón */
+    color: white; /* Texto en blanco */
+    padding: 10px 15px; /* Espaciado interno */
+    border: none; /* Sin borde */
+    border-radius: 4px; /* Bordes redondeados */
+    cursor: pointer; /* Cambiar cursor al pasar el ratón */
+    transition: background-color 0.3s; /* Transición suave */
+}
+
+#addEquipmentModal .btn-add:hover {
+    background-color: #131a45; /* Color al pasar el ratón */
+}
+
+/* Estilo para el botón de cerrar */
+#addEquipmentModal .close {
+    color: #aaa; /* Color del botón de cerrar */
+    float: right; /* Alinear a la derecha */
+    font-size: 28px; /* Tamaño del texto */
+    font-weight: bold; /* Negrita */
+}
+
+#addEquipmentModal .close:hover,
+#addEquipmentModal .close:focus {
+    color: black; /* Color al pasar el ratón */
+    text-decoration: none; /* Sin subrayado */
+    cursor: pointer; /* Cambiar cursor al pasar el ratón */
+}
+
+
+/* Estilo para el modal de detalles del equipo */
+#equipmentDetailsModal .modal-content {
+    background-color: #ffffff; /* Color de fondo blanco */
+    margin: 10% auto; /* Margen superior y centrado */
+    padding: 20px;
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para el efecto de elevación */
+    width: 80%; /* Ancho del modal */
+    max-width: 500px; /* Ancho máximo */
+}
+
+/* Estilo para la imagen en el modal de detalles */
+#equipmentDetailsModal img {
+    max-width: 400%; /* Ancho máximo 100% para que no exceda el contenedor */
+    height: auto; /* Mantiene la altura automática para respetar la proporción */
+    border-radius: 4px; /* Bordes redondeados en la imagen */
+    margin-top: 10px; /* Espacio superior */
+    margin-bottom: 20px;
+
+}
+
+.modal-content img {
+    max-width: 100%; /* Ajusta según sea necesario */
+    height: auto; /* Mantiene la relación de aspecto */
+    cursor: pointer; /* Cambia el cursor al pasar el mouse */
+}
+
+
+#addEquipmentModal .modal-content {
+    background-color: #ffffff; /* Color de fondo blanco */
+    margin: 5% auto; /* Margen superior reducido */
+    padding: 20px;
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para el efecto de elevación */
+    width: 80%; /* Ancho del modal */
+    max-width: 500px; /* Ancho máximo */
+}
 
 /* Estilo para el login*/
+
+
+

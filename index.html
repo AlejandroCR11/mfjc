@@ -44,7 +44,7 @@
                 </thead>
                 <tbody>
                     <!-- Los equipos se agregarán aquí -->
-                    </div>
+                    
                     
                 </tbody>
             </table>
@@ -96,13 +96,66 @@
         <div class="modal-content">
             <span class="close" id="closeEquipmentModal">&times;</span>
             <h2>Agregar Equipo</h2>
+
+            <!-- Foto y Nombre -->
             <label for="equipmentPhoto">Foto (Cargar archivo):</label>
             <input type="file" id="equipmentPhoto" accept="image/*">
+            
             <label for="equipmentName">Nombre del Equipo:</label>
             <input type="text" id="equipmentName" placeholder="Nombre del equipo" required>
+
+            <!-- Clasificación -->
+            <label for="equipmentArea">Área del Equipo:</label>
+            <select id="equipmentArea">
+                <option value="producción">Producción</option>
+                <option value="mantenimiento">Mantenimiento</option>
+                <option value="calidad">Calidad</option>
+            </select>
+
+            <label for="equipmentType">Tipo:</label>
+            <select id="equipmentType">
+                <option value="máquina">Máquina</option>
+                <option value="herramienta">Herramienta</option>
+                <option value="insumo">Insumo</option>
+            </select>
+
+            <label for="equipmentSubtype">Subtipo:</label>
+            <select id="equipmentSubtype">
+                <option value="electrónico">Electrónico</option>
+                <option value="mecánico">Mecánico</option>
+                <option value="neumático">Neumático</option>
+            </select>
+
+            <!-- Detalles adicionales -->
+            <label for="equipmentBrand">Marca del Equipo:</label>
+            <input type="text" id="equipmentBrand" placeholder="Marca del equipo">
+
+            <label for="equipmentSerial">Serial del Equipo:</label>
+            <input type="text" id="equipmentSerial" placeholder="Serial del equipo">
+
+            <label for="equipmentModel">Modelo del Equipo:</label>
+            <input type="text" id="equipmentModel" placeholder="Modelo del equipo">
+
+            <label for="equipmentManual">Manual del Equipo (URL):</label>
+            <input type="url" id="equipmentManual" placeholder="URL del manual">
+
+            <label for="equipmentWarranty">Fecha de Garantía:</label>
+            <input type="date" id="equipmentWarranty">
+
             <button id="submitEquipmentBtn">Agregar Equipo</button>
         </div>
     </div>
+
+        <!-- Modal para ver detalles del equipo -->
+    <div id="equipmentDetailsModal" class="modal">
+        <div class="modal-content">
+            <span class="close" id="closeEquipmentDetailsModal">&times;</span>
+            <h2>Detalles del Equipo</h2>
+            <div id="equipmentDetailsContent"></div>
+            <img id="detailsImage" src="" alt="Detalles" style="display:none; max-width: 100%;"/>
+        </div>
+    </div>
+
 
     <!-- Modal para agregar mantenimiento -->
     <div id="addMaintenanceModal" class="modal">
@@ -121,13 +174,15 @@
             <button id="submitMaintenanceBtn">Agregar Mantenimiento</button>
         </div>
     </div>
-    
+
+    <!-- Modal para imagen ampliada -->
     <div id="imageModal" class="modal">
         <div class="modal-content">
             <span class="close" id="closeImageModal">&times;</span>
             <img id="expandedImage" src="" alt="Imagen ampliada">
         </div>
     </div>
+
 
      <!-- Modal para agregar repuesto -->
     <div id="addPartModal" class="modal">
@@ -143,6 +198,7 @@
             <button id="submitPartBtn">Agregar Repuesto</button>
         </div>
     </div>
+    
 
     <script src="js/script.js"></script>
 </body>
