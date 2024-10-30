@@ -1,19 +1,128 @@
-body {
+/* Estilos de estructura de la página */
+html, body {
     font-family: Arial, sans-serif;
-    margin: auto;
-    padding: auto;
-    background-color: #ffffff;
-    margin-left: auto;
-    margin-right: auto;
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
 }
 
+
 header {
-    background: #121212;
+    display: flex;
+    align-items: center; /* Centra verticalmente el contenido */
+    background: #09091d;
     color: #fff;
-    padding: 10px 0;
+    padding: 15px;
     text-align: center;
 
 }
+
+/* Estilo para el logo en el header */
+#headerLogo {
+    width: 80px; /* Ajusta el tamaño del logo */
+    height: auto; /* Mantén la proporción */
+    margin-right: 15px; /* Espacio entre el logo y el título */
+}
+
+/* Estilo para el contenido del header */
+.header-content {
+    flex: 1; /* Permite que el contenido ocupe el espacio restante */
+    text-align: center;
+}
+header h1 {
+    font-size: 24px;
+    margin: 0;
+}
+
+
+/* Media query para pantallas más pequeñas */
+@media (max-width: 768px) {
+    #headerLogo {
+        width: 60px; /* Reduce el tamaño del logo en móviles */
+        margin-right: 10px; /* Ajusta el margen en móviles */
+    }
+
+    header h1 {
+        font-size: 20px; /* Reduce el tamaño de la fuente del título en móviles */
+    }
+
+    /* Opcional: Cambiar la alineación del header en móviles */
+    header {
+        flex-direction: column; /* Cambia a columna para apilar logo y título */
+        align-items: center; /* Centra todos los elementos */
+    }
+}
+
+/* Media query para pantallas aún más pequeñas */
+@media (max-width: 480px) {
+    #headerLogo {
+        width: 50px; /* Reduce aún más el tamaño del logo en pantallas muy pequeñas */
+    }
+
+    header h1 {
+        font-size: 18px; /* Reduce el tamaño de la fuente aún más */
+    }
+}
+
+
+/* Asegura que el main ocupe el espacio disponible entre el header y el footer */
+main {
+    flex: 1;
+    padding: 20px;
+    background-color: #f9f9f9; /* Color de fondo para el área principal */
+}
+
+/* Estilo para el footer */
+footer {
+    background-color: #333;
+    color: #ffffff;
+    text-align: center;
+    padding: 15px 0;
+    width: 100%;
+    position: relative;
+    bottom: 0;
+    font-size: 14px;
+}
+
+/* Estilos para dispositivos móviles */
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 20px;
+    }
+    nav ul li {
+        margin: 5px;
+    }
+    main {
+        padding: 15px;
+    }
+    footer {
+        padding: 10px 0;
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 480px) {
+    header h1 {
+        font-size: 18px;
+    }
+    nav ul {
+        flex-direction: column;
+    }
+    nav ul li {
+        margin: 5px 0;
+    }
+    main {
+        padding: 10px;
+    }
+    footer {
+        font-size: 12px;
+    }
+}
+
+#content-wrap {
+    padding-bottom: 2.5rem;    /* altura de pie de página */
+  }
 
 nav ul {
     list-style: none;
@@ -55,26 +164,31 @@ th, td {
 }
 
 button {
-    margin: 10px 0;
-    padding: 10px 15px;
-    background-color: #1f3db4;
-    color: white;
+    background-color: #293a60;
+    color: rgb(242, 242, 242);
     border: none;
+    padding: 0 20px;
+    line-height: 38px;
+    border-radius: 10px;
+    -webkit-box-shadow: -2px 3px 0px #d4d4d4;
+    box-shadow: -2px 3px 0px #d4d4d4;
+    font-size: 14px;
+    font-weight: 600;
     cursor: pointer;
-}
+    -webkit-transition-property: line-height;
+    -o-transition-property: line-height;
+    transition-property: line-height;
+    -webkit-transition-duration: 0.3s;
+    -o-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+    
+  }
+
 
 button:hover {
-    background-color: #131a45;
+    background-color: #0b0f2a;
 }
 
-footer {
-    text-align: center;
-    padding: 20px;
-    background: #333;
-    color: #fff;
-    position: relative; /* Cambiado para evitar solapamientos con el contenido */
-    bottom: 0;
-}
 
 /* Estilos adicionales para modales */
 .modal {
@@ -111,36 +225,9 @@ footer {
     text-decoration: none;
     cursor: pointer;
 }
-/* Estilos para el modal de imagen ampliada */
-#imageModal {
-    display: none; /* Oculto por defecto */
-    position: fixed;
-    z-index: 1000; /* Aparece sobre otros elementos */
-    left: 0;
-    top: 0;
-    width: 100%; /* Cubre toda la pantalla */
-    height: 100%; /* Cubre toda la pantalla */
-    background-color: rgba(0, 0, 0, 0.8); /* Fondo semi-transparente */
-    justify-content: center;
-    align-items: center;
-    overflow: hidden; /* Oculta el desbordamiento */
-}
 
-#imageModal .modal-content {
-    position: relative;
-    margin: auto;
-    padding: 0;
-    width: 90%; /* O un valor adecuado para el contenedor */
-    max-width: 4000px; /* Limitar el ancho máximo */
-}
 
-#expandedImage {
-    width: 100%;
-    height: auto;
-    max-height: 90vh; /* No más del 90% de la altura de la ventana */
-    max-width: 100%; /* No más del 100% del ancho de la ventana */
-    object-fit: contain; /* La imagen se ajusta manteniendo su relación de aspecto */
-}
+
 
 .close {
     position: absolute;
@@ -151,56 +238,80 @@ footer {
     font-weight: bold;
     cursor: pointer;
 }
-/* Estilo para el header */
-header {
-    display: flex; /* Usar Flexbox para alinear los elementos */
-    flex-direction: column; /* Organizar elementos en columnas */
-    justify-content: space-between; /* Espacio entre el contenido del encabezado y la navegación */
-    align-items: center; /* Centrar verticalmente los elementos */
-    padding: 10px; /* Espaciado alrededor del header */
-}
 
-/* Estilo para el logo en el header */
-#headerLogo {
-    width: 100px; /* Ajustar el tamaño según sea necesario */
-    height: auto; /* Mantener la proporción */
-    position: absolute; /* Permitir que se mueva sin afectar otros elementos */
-    left: 10px; /* Ajustar la posición horizontal del logo */
-    margin-top: 0px;
-    margin-right: auto;
-}
-
-/* Contenido del encabezado */
-.header-content {
-    text-align: center; /* Centrar el texto dentro de su contenedor */
-}
-
-/* Estilo para el título */
-header h1 {
-    margin: 0; /* Eliminar el margen por defecto del h1 */
-}
-
-/* Estilo para la navegación */
+/* Estilo para el contenedor de navegación */
 nav {
-    margin-top: 10px; /* Espacio entre el título y la navegación */
+    /*background-color: #2c3e50; */
+    padding: 15px 0;
+    box-shadow: 0 2px px rgba(0, 0, 0, 0.2); /* Sombra suave */
 }
 
+/* Estilos para la lista de navegación */
 nav ul {
-    list-style-type: none; /* Eliminar las viñetas de la lista */
-    padding: 0; /* Eliminar el padding por defecto */
-    display: flex; /* Alinear los enlaces horizontalmente */
-    justify-content: center; /* Centrar los enlaces en la barra de navegación */
+ 
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 0px; /* Espacio entre cada enlace */
 }
 
-nav ul li {
-    margin-right: 15px; /* Espacio entre los enlaces */
-}
-
+/* Estilos para cada enlace de navegación */
 nav ul li a {
-    text-decoration: none; /* Eliminar el subrayado de los enlaces */
+    color: #000000; /* Color del texto */
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 10px 20px;
+    border-radius: 25px;
+    background-color: #ffffff; /* Color de fondo del botón */
+    transition: all 0.5s ease; /* Transición para cambios suaves */
+    position: relative;
 }
 
 
+/* Media query para pantallas más pequeñas */
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column; /* Cambia la dirección de los botones a columna */
+        align-items: center; /* Centra los botones */
+        gap: 15px; /* Aumenta el espacio entre botones cuando están apilados */
+    }
+
+    nav ul li a {
+        font-size: 14px; /* Ajusta el tamaño del texto */
+        padding: 8px 12px; /* Reduce el padding para que se vea más compacto */
+    }
+}
+
+/* Media query para pantallas aún más pequeñas */
+@media (max-width: 480px) {
+    header {
+        padding: 5px 0; /* Reduce el padding en móviles */
+    }
+
+    nav ul li a {
+        padding: 6px 10px; /* Reduce aún más el padding */
+        font-size: 12px; /* Ajusta el tamaño del texto para móviles */
+    }
+}
+
+/* Efecto de hover */
+nav ul li a:hover {
+    background-color: #b92929; /* Color de fondo al pasar el ratón */
+    color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra al pasar el mouse */
+    transition: background-color 0.1s ease, transform 1s ease; /* Cambia la duración a 0.1s */
+    transform: translateY(-2px); /* Levanta ligeramente el enlace */
+}
+
+/* Efecto de fondo en cada enlace al hacer clic */
+nav ul li a:active {
+    background-color: #00ff40; /* Color al hacer clic */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Reduce la sombra */
+    transform: translateY(1px); /* Efecto de clic */
+}
 /* Estilo para el Panel de Control */
 #panelControl {
     margin-top: 30px; /* Espacio superior para separar de secciones anteriores */
@@ -258,5 +369,386 @@ nav ul li a {
 }
 
 
+/* Estilo específico para el modal de agregar equipo */
+#addEquipmentModal {
+    display: none; /* Ocultamos el modal por defecto */
+    position: fixed;
+    z-index: 1; /* Se asegura que esté por encima de otros elementos */
+    left: 0;
+    top: 0;
+    width: 100%; /* Ancho completo */
+    height: 100%; /* Altura completa */
+    overflow: auto; /* Habilita scroll si es necesario */
+    background-color: rgba(0, 0, 0, 0.6); /* Fondo oscuro con opacidad */
+}
+
+/* Contenido del modal de agregar equipo */
+#addEquipmentModal .modal-content {
+    background-color: #ffffff; /* Color de fondo blanco */
+    margin: 10% auto; /* Margen superior y centrado */
+    padding: 20px;
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para el efecto de elevación */
+    width: 80%; /* Ancho del modal */
+    max-width: 500px; /* Ancho máximo */
+}
+
+/* Estilos para los títulos dentro del modal */
+#addEquipmentModal h2 {
+    color: #333; /* Color del título */
+    margin-bottom: 20px; /* Espacio inferior */
+}
+
+/* Estilos para las etiquetas de entrada */
+#addEquipmentModal label {
+    display: block; /* Mostrar cada etiqueta en una nueva línea */
+    margin-bottom: 5px; /* Espacio inferior */
+    font-weight: bold; /* Negrita */
+}
+
+/* Estilos para los campos de entrada */
+#addEquipmentModal input[type="text"],
+#addEquipmentModal input[type="number"],
+#addEquipmentModal select {
+    width: calc(100% - 20px); /* Ancho completo menos el padding */
+    padding: 10px; /* Espaciado interno */
+    border: 1px solid #ddd; /* Bordes suaves */
+    border-radius: 4px; /* Bordes redondeados */
+    margin-bottom: 15px; /* Espacio inferior */
+    box-sizing: border-box; /* Incluye padding en el ancho total */
+}
+
+/* Estilos para el botón de agregar */
+#addEquipmentModal .btn-add {
+    background-color: #1f3db4; /* Color del botón */
+    color: white; /* Texto en blanco */
+    padding: 10px 15px; /* Espaciado interno */
+    border: none; /* Sin borde */
+    border-radius: 4px; /* Bordes redondeados */
+    cursor: pointer; /* Cambiar cursor al pasar el ratón */
+    transition: background-color 0.3s; /* Transición suave */
+}
+
+#addEquipmentModal .btn-add:hover {
+    background-color: #131a45; /* Color al pasar el ratón */
+}
+
+/* Estilo para el botón de cerrar */
+#addEquipmentModal .close {
+    color: #aaa; /* Color del botón de cerrar */
+    float: right; /* Alinear a la derecha */
+    font-size: 28px; /* Tamaño del texto */
+    font-weight: bold; /* Negrita */
+}
+
+#addEquipmentModal .close:hover,
+#addEquipmentModal .close:focus {
+    color: black; /* Color al pasar el ratón */
+    text-decoration: none; /* Sin subrayado */
+    cursor: pointer; /* Cambiar cursor al pasar el ratón */
+}
+
+
+/* Estilo para el modal de detalles del equipo */
+#equipmentDetailsModal .modal-content {
+    background-color: #ffffff; /* Color de fondo blanco */
+    margin: 10% auto; /* Margen superior y centrado */
+    padding: 20px;
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para el efecto de elevación */
+    width: 80%; /* Ancho del modal */
+    max-width: 500px; /* Ancho máximo */
+}
+
+/* Estilo para la imagen en el modal de detalles */
+#equipmentDetailsModal img {
+    max-width: 400%; /* Ancho máximo 100% para que no exceda el contenedor */
+    height: auto; /* Mantiene la altura automática para respetar la proporción */
+    border-radius: 4px; /* Bordes redondeados en la imagen */
+    margin-top: 10px; /* Espacio superior */
+    margin-bottom: 20px;
+
+}
+
+.modal-content img {
+    max-width: 100%; /* Ajusta según sea necesario */
+    height: auto; /* Mantiene la relación de aspecto */
+    cursor: pointer; /* Cambia el cursor al pasar el mouse */
+}
+
+
+#addEquipmentModal .modal-content {
+    background-color: #ffffff; /* Color de fondo blanco */
+    margin: 5% auto; /* Margen superior reducido */
+    padding: 20px;
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para el efecto de elevación */
+    width: 80%; /* Ancho del modal */
+    max-width: 500px; /* Ancho máximo */
+}
 
 /* Estilo para el login*/
+
+
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    }
+    
+    .close:hover,
+    .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+    }
+
+
+    
+
+/* Modal para la imagen ampliada */
+#imageModal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    overflow: hidden;
+    padding-top: 50px;
+}
+
+/* Imagen ampliada centrada y sin bordes */
+#expandedImage {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+    display: block;
+    border: none;
+    margin: auto; /* Centra la imagen vertical y horizontalmente */
+   
+}
+
+
+.no-scroll {
+    overflow: hidden;
+}
+
+
+
+
+/* Estilos para los botones de paginación */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.pagination button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: -3px 15px;
+    margin: 0 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+/* Cambiar color de fondo al pasar el cursor */
+.pagination button:hover {
+    background-color: #0056b3;
+}
+
+/* Estilo para botones deshabilitados */
+.pagination button:disabled {
+    background-color: #c0c0c0;
+    cursor: not-allowed;
+}
+
+/* Estilo para el número de página actual */
+.pagination .active {
+    background-color: #ff5252; /* Color diferente para la página actual */
+    color: white; /* Asegúrate de que el texto sea legible */
+    font-weight: bold; /* Resaltar el texto */
+    border-radius: 5px; /* Bordes redondeados para el número */
+   /* padding: 10px 15px;  Igualar tamaño con los botones */
+}
+
+
+/* Estilos para la barra de búsqueda  */
+#searchInput {
+    width: 80%;
+    max-width: 450px;
+    padding: 20px 15px;
+    font-size: 16px;
+    border: none;
+    border-radius: 25px;
+    background-color: #f0f0f5;
+    color: #333;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+    margin-top: 10px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    padding-left: 40px; /* Espacio para el ícono */
+    position: relative;
+}
+
+/* Estilo para el icono dentro del campo de búsqueda */
+#searchInput::placeholder {
+    color: #999;
+    font-style: italic;
+}
+
+/* Icono de búsqueda */
+.search-container {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    max-width: 450px;
+}
+
+.search-container::before {
+    content: "\1F50D"; /* Unicode para el icono de lupa */
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: #999;
+}
+
+#searchInput:focus {
+    background-color: #ffffff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+    outline: none;
+}
+
+
+
+/* Estilo para las celdas del encabezado del creador de opciones */
+thead {
+    background-color: #4CAF50; /* Color de fondo del encabezado */
+    color: white; /* Color del texto del encabezado */
+}
+
+
+/* Estilo para la etiqueta del selector */
+label {
+    display: block; /* Hace que la etiqueta ocupe todo el ancho */
+    margin-bottom: 8px; /* Espaciado inferior entre la etiqueta y el selector */
+    font-weight: bold; /* Negrita */
+    font-size: 16px; /* Tamaño de fuente */
+}
+
+#optionType {
+    width: 20%; /* Ancho predeterminado */
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #fff;
+    font-size: 16px;
+    transition: border-color 0.3s ease;
+    margin-bottom: 20px; /* Espacio entre elementos */
+}
+
+/* Ajustes para pantallas más pequeñas */
+@media (max-width: 600px) {
+    #optionType,
+    #optionValue,  /* Campo de texto */
+    #addOptionBtn  /* Botón de agregar opción */
+    {
+        width: 100%; /* Ocupar el ancho completo */
+        font-size: 16px; /* Tamaño de fuente ajustado */
+        padding: 10px; /* Espaciado interno adecuado */
+        margin-top: 12px; /* Espacio entre elementos */
+    }
+}
+/* Efecto al hacer foco en el selector */
+#optionType:focus {
+    border-color: #4CAF50; /* Color del borde al hacer foco */
+    outline: none; /* Eliminar el contorno predeterminado */
+}
+
+/* Estilo para las opciones del selector */
+#optionType option {
+    padding: 10px; /* Espaciado interno en opciones */
+}
+
+/* Estilo para el botón de agregar opción */
+#addOptionBtn {
+    margin-top: 20px; /* Margen superior para separar del selector */
+    margin-bottom: 10px; /* Margen inferior opcional para separar del contenido siguiente */
+    padding: 10px 20px; /* Espaciado interno del botón */
+    border: none; /* Sin borde */
+    border-radius: 4px; /* Bordes redondeados */
+    background-color: #4CAF50; /* Color de fondo del botón */
+    color: white; /* Color del texto */
+    font-size: 16px; /* Tamaño de fuente */
+    cursor: pointer; /* Cambiar el cursor al pasar sobre el botón */
+    transition: background-color 0.3s ease; /* Transición suave para el fondo */
+    display: block; /* Asegura que el botón ocupe toda la línea */
+    width: 20%; /* Asegura que el botón ocupe todo el ancho disponible (opcional) */
+}
+
+
+@media (max-width: 768px) {
+    #addOptionBtn {
+        width: 170px; /* Reduce el tamaño del logo en móviles */
+        margin-right: 10px; /* Ajusta el margen en móviles */
+
+}
+}
+
+/* Efecto al pasar el mouse sobre el botón */
+#addOptionBtn:hover {
+    background-color: #45a049; /* Color más oscuro al pasar el mouse */
+}
+
+/* Estilo para la etiqueta del campo de texto */
+label[for="optionValue"] {
+    display: block; /* Cambia a block para que ocupe toda la línea y esté justo encima del input */
+    margin-bottom: 2px; /* Espacio muy pequeño entre la etiqueta y el campo de texto */
+    font-weight: bold; /* Negrita */
+    font-size: 16px; /* Tamaño de fuente */
+}
+
+/* Estilo para el campo de texto de Nombre de Opción */
+#optionValue {
+    margin-top: 5px; /* Espacio entre elementos */
+    width: 10%; /* Asegúrate de que el input ocupe todo el ancho disponible */
+    padding: 8px; /* Espaciado interno */
+    border: 1px solid #ccc; /* Borde gris claro */
+    border-radius: 4px; /* Bordes redondeados */
+    background-color: #fff; /* Fondo blanco */
+    font-size: 16px; /* Tamaño de fuente */
+    transition: border-color 0.3s ease; /* Transición suave para el borde */
+}
+@media (max-width: 768px) {
+    #optionValue  {
+        width: 170px; /* Reduce el tamaño del logo en móviles */
+        margin-right: 10px; /* Ajusta el margen en móviles */
+    }
+}
+
+/* Efecto al hacer foco en el campo de texto */
+#optionValue:focus {
+    border-color: #4CAF50; /* Color del borde al hacer foco */
+    outline: none; /* Eliminar el contorno predeterminado */
+}
+
+/* Estilo para el mensaje de error (opcional) */
+#errorOptionValue {
+    color: red; /* Color rojo para mensajes de error */
+    font-size: 14px; /* Tamaño de fuente más pequeño */
+    margin-top: 5px; /* Espaciado superior */
+    display: none; /* Ocultar por defecto */
+}
+
+
+
