@@ -648,7 +648,7 @@ label {
 
 /* Estilo para el selector de tipo de opción */
 #optionType {
-    width: 17%; /* Ancho completo */
+    width: 20%; /* Ancho completo */
     padding: 12px; /* Espaciado interno */
     border: 1px solid #ccc; /* Borde gris claro */
     border-radius: 4px; /* Bordes redondeados */
@@ -659,7 +659,7 @@ label {
 
 @media (max-width: 768px) {
     #optionTyp {
-        width: 170px; /* Reduce el tamaño del logo en móviles */
+        width: 2000px; /* Reduce el tamaño del logo en móviles */
         margin-right: 10px; /* Ajusta el margen en móviles */
     }
 }
