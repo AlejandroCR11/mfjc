@@ -92,7 +92,7 @@ footer {
     bottom: 0;
     
     display: grid;
-    min-width: 100dvh;
+    min-width: auto;
     grid-template-rows: 
         auto 1fr auto;
     
