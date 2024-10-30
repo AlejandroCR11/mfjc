@@ -130,48 +130,39 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     submitPartBtn.addEventListener("click", () => {
-        // Obtenemos los valores de los campos dentro del modal (suponiendo que existen inputs con id)
+        const partPhotoInput = document.getElementById("partPhoto");
         const partName = document.getElementById("partName").value;
         const partQuantity = document.getElementById("partQuantity").value;
     
-        if (partName && partQuantity) {
-            // Crear una nueva fila en la tabla de partes
-            const newRow = partsTableBody.insertRow();
+        if (partPhotoInput.files.length > 0 && partName && partQuantity) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const row = partsTableBody.insertRow();
+                const photoCell = row.insertCell(0);
+                const nameCell = row.insertCell(1);
+                const quantityCell = row.insertCell(2);
+                const actionsCell = row.insertCell(3);
     
-            // Insertar las celdas para el nombre, cantidad y opciones
-            const nameCell = newRow.insertCell(0);
-            const quantityCell = newRow.insertCell(1);
-            const optionsCell = newRow.insertCell(2);
+                photoCell.innerHTML = `<img src="${e.target.result}" alt="${partName}" width="50" height="50" onclick="showImage(this)">`;
+                nameCell.innerText = partName;
+                quantityCell.innerHTML = `<span class="part-quantity">${partQuantity}</span>`;
+                actionsCell.innerHTML = `
+                    <button onclick="incrementQuantity(this)">+</button>
+                    <button onclick="decrementQuantity(this)">-</button>
+                    <button onclick="deletePart(this)">Eliminar</button>
+                `;
     
-            nameCell.innerText = partName;
-            quantityCell.innerHTML = `<span class="part-quantity">${partQuantity}</span>`;
-    
-            // Crear los botones de incremento, decremento y eliminación
-            const incrementButton = document.createElement("button");
-            incrementButton.textContent = "+";
-            incrementButton.addEventListener("click", () => incrementQuantity(quantityCell));
-    
-            const decrementButton = document.createElement("button");
-            decrementButton.textContent = "-";
-            decrementButton.addEventListener("click", () => decrementQuantity(quantityCell));
-    
-            const deleteButton = document.createElement("button");
-            deleteButton.textContent = "Eliminar";
-            deleteButton.addEventListener("click", () => deletePart(newRow));
-    
-            // Agregar los botones a la celda de opciones
-            optionsCell.appendChild(incrementButton);
-            optionsCell.appendChild(decrementButton);
-            optionsCell.appendChild(deleteButton);
-    
-            // Limpiar el formulario y cerrar el modal
-            document.getElementById("partName").value = '';
-            document.getElementById("partQuantity").value = '';
-            closeModal(addPartModal);
+                addPartModal.style.display = "none";
+                partPhotoInput.value = "";
+                document.getElementById("partName").value = "";
+                document.getElementById("partQuantity").value = "";
+            };
+            reader.readAsDataURL(partPhotoInput.files[0]);
         } else {
-            alert("Por favor, completa todos los campos.");
+            alert("Por favor, complete todos los campos obligatorios.");
         }
     });
+
     
     // Función para incrementar la cantidad del repuesto
     function incrementQuantity(quantityCell) {
