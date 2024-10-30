@@ -82,7 +82,6 @@ button:hover {
     background-color: #0b0f2a;
 }
 
-
 footer {
     text-align: center;
     padding: 1em;
@@ -91,10 +90,11 @@ footer {
     position: relative; /* Cambiado para evitar solapamientos con el contenido */
     bottom: 0;
     
-    display: grid;
-    min-width: auto;
-    grid-template-rows: 
-        auto 1fr auto;
+    width: 100%;
+    height: 81px;
+    position: absolute;
+    bottom: 0;
+    left: 0;;
     
   
 }
