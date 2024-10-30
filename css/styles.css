@@ -1,12 +1,10 @@
-body {
+/* Estilos de estructura de la página */
+html, body {
     font-family: Arial, sans-serif;
-    margin: auto;
-    padding: auto;
-    background-color: #ffffff;
-    margin-left: auto;
-    margin-right: auto;
-    height: 100%
-    posirio
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
 }
 
 header {
@@ -16,6 +14,46 @@ header {
     text-align: center;
 
 }
+
+
+/* Asegura que el main ocupe el espacio disponible entre el header y el footer */
+main {
+    flex: 1;
+    padding: 20px;
+    background-color: #f9f9f9; /* Color de fondo para el área principal */
+}
+
+/* Estilo para el footer */
+footer {
+    background-color: #333;
+    color: #ffffff;
+    text-align: center;
+    padding: 15px 0;
+    width: 100%;
+    position: relative;
+    bottom: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#content-wrap {
+    padding-bottom: 2.5rem;    /* altura de pie de página */
+  }
 
 nav ul {
     list-style: none;
@@ -61,7 +99,7 @@ button {
     color: rgb(242, 242, 242);
     border: none;
     padding: 0 20px;
-    line-height: 50px;
+    line-height: 38px;
     border-radius: 10px;
     -webkit-box-shadow: -2px 3px 0px #d4d4d4;
     box-shadow: -2px 3px 0px #d4d4d4;
@@ -81,23 +119,6 @@ button {
 button:hover {
     background-color: #0b0f2a;
 }
-
-footer {
-    text-align: center;
-    padding: 1em;
-    background: #333;
-    color: #fff; 
-    width: 98%;
-    height: 81px;
-    position: relative; /* Cambiado para evitar solapamientos con el contenido */ 
-    bottom: 0;
-    left: 0;;
-    
-  
-}
-
-
-
 
 
 /* Estilos adicionales para modales */
@@ -467,3 +488,50 @@ nav ul li a {
    /* padding: 10px 15px;  Igualar tamaño con los botones */
 }
 
+
+/* Estilos para la barra de búsqueda  */
+#searchInput {
+    width: 100%;
+    max-width: 450px;
+    padding: 12px 15px;
+    font-size: 16px;
+    border: none;
+    border-radius: 25px;
+    background-color: #f0f0f5;
+    color: #333;
+    box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+    margin-top: 10px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    padding-left: 40px; /* Espacio para el ícono */
+    position: relative;
+}
+
+/* Estilo para el icono dentro del campo de búsqueda */
+#searchInput::placeholder {
+    color: #999;
+    font-style: italic;
+}
+
+/* Icono de búsqueda */
+.search-container {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    max-width: 450px;
+}
+
+.search-container::before {
+    content: "\1F50D"; /* Unicode para el icono de lupa */
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: #999;
+}
+
+#searchInput:focus {
+    background-color: #ffffff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+    outline: none;
+}
