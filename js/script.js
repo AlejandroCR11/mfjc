@@ -6,13 +6,11 @@ document.addEventListener("DOMContentLoaded", () => {
         overdue: 0,
         history: []
     };
-    
-    
+
     // Modal y botón de agregar equipo
     const addEquipmentModal = document.getElementById("addEquipmentModal");
     const submitEquipmentBtn = document.getElementById("submitEquipmentBtn");
     const closeEquipmentModal = document.getElementById("closeEquipmentModal");
-    
 
     // Modal y botón de agregar repuesto
     const addPartModal = document.getElementById("addPartModal");
@@ -30,7 +28,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const equipmentDetailsModal = document.getElementById("equipmentDetailsModal");
     const equipmentDetailsContent = document.getElementById("equipmentDetailsContent");
     const closeEquipmentDetailsModal = document.getElementById("closeEquipmentDetailsModal");
-
 
     document.getElementById("addEquipmentBtn").addEventListener("click", () => {
         addEquipmentModal.style.display = "block";
@@ -54,9 +51,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
     closeImageModal.onclick = () => {
         imageModal.style.display = "none";
+        document.body.style.overflow = ""; // Restaurar el scroll del fondo
     };
-    
-    
+
+    // Función para abrir el modal de imagen ampliada
+    function openImageModal(imageSrc) {
+        expandedImage.src = imageSrc; 
+        document.body.style.overflow = "hidden"; // Bloquear el scroll del fondo
+        imageModal.style.display = "block"; 
+    }
+
     submitEquipmentBtn.addEventListener("click", () => {
         const equipmentPhotoInput = document.getElementById("equipmentPhoto");
         const equipmentName = document.getElementById("equipmentName").value;
@@ -68,7 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const equipmentModel = document.getElementById("equipmentModel").value;
         const equipmentManual = document.getElementById("equipmentManual").value || "No tiene manual";
         const equipmentWarrantyDate = document.getElementById("equipmentWarranty").value;
-    
+
         // Calcular días de garantía
         let equipmentWarrantyDays;
         if (equipmentWarrantyDate) {
@@ -85,7 +89,6 @@ document.addEventListener("DOMContentLoaded", () => {
             equipmentWarrantyDays = "No tiene garantía";
         }
 
-    
         if (equipmentPhotoInput.files.length > 0 && equipmentName) {
             const reader = new FileReader();
             reader.onload = function (e) {
@@ -94,7 +97,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const nameCell = row.insertCell(1);
                 const detailsCell = row.insertCell(2);
                 const actionsCell = row.insertCell(3);
-    
+
                 // Asignar datos a la fila usando dataset
                 row.dataset.area = equipmentArea;
                 row.dataset.type = equipmentType;
@@ -105,16 +108,17 @@ document.addEventListener("DOMContentLoaded", () => {
                 row.dataset.manual = equipmentManual;
                 row.dataset.warrantyDate = equipmentWarrantyDate || "No aplica";
                 row.dataset.warrantyDays = equipmentWarrantyDays;
-    
+
+                // Asegúrate de que la imagen pueda abrirse
                 photoCell.innerHTML = `<img src="${e.target.result}" alt="${equipmentName}" width="50" height="50" onclick="showImage(this)">`;
                 nameCell.innerText = equipmentName;
-    
+
                 actionsCell.innerHTML = `
                     <button onclick="showEquipmentDetails(this)">Ver detalles</button>
                     <button onclick="showMaintenanceForm(this)">Mantenimiento</button>
                     <button onclick="deleteEquipment(this)">Eliminar</button>
                 `;
-    
+
                 addEquipmentModal.style.display = "none"; 
                 equipmentPhotoInput.value = "";
                 document.getElementById("equipmentName").value = "";
@@ -132,13 +136,12 @@ document.addEventListener("DOMContentLoaded", () => {
             alert("Por favor, complete todos los campos obligatorios.");
         }
     });
-    
-    
+
     submitPartBtn.addEventListener("click", () => {
         const partPhotoInput = document.getElementById("partPhoto");
         const partName = document.getElementById("partName").value;
         const partQuantity = document.getElementById("partQuantity").value;
-
+    
         if (partPhotoInput.files.length > 0 && partName && partQuantity) {
             const reader = new FileReader();
             reader.onload = function (e) {
@@ -147,7 +150,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const nameCell = row.insertCell(1);
                 const quantityCell = row.insertCell(2);
                 const actionsCell = row.insertCell(3);
-
+    
                 photoCell.innerHTML = `<img src="${e.target.result}" alt="${partName}" width="50" height="50" onclick="showImage(this)">`;
                 nameCell.innerText = partName;
                 quantityCell.innerHTML = `<span class="part-quantity">${partQuantity}</span>`;
@@ -155,25 +158,20 @@ document.addEventListener("DOMContentLoaded", () => {
                     <button onclick="incrementQuantity(this)">+</button>
                     <button onclick="decrementQuantity(this)">-</button>
                     <button onclick="deletePart(this)">Eliminar</button>
-                    
                 `;
-
+    
                 addPartModal.style.display = "none";
                 partPhotoInput.value = "";
                 document.getElementById("partName").value = "";
                 document.getElementById("partQuantity").value = "";
             };
-            reader.readAsDataURL(partPhotoInput.files[0]); 
+            reader.readAsDataURL(partPhotoInput.files[0]);
         } else {
             alert("Por favor, complete todos los campos obligatorios.");
         }
     });
 
 
-    window.showImage = function(image) {
-        expandedImage.src = image.src; 
-        imageModal.style.display = "block"; 
-    };
 
     window.deleteRow = function(button) {
         const row = button.parentNode.parentNode;
@@ -230,31 +228,30 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         };
 
-        // Mostrar los detalles del equipo
-        window.showEquipmentDetails = function(button) {
-            const row = button.parentNode.parentNode;
-            
-            const photoSrc = row.cells[0].querySelector("img").src; // Obtener la fuente de la imagen
-            const name = row.cells[1].innerText;
+    // Mostrar los detalles del equipo
+    window.showEquipmentDetails = function(button) {
+        const row = button.parentNode.parentNode;
 
-            // Actualiza el contenido del modal con detalles
-            equipmentDetailsContent.innerHTML = `
-                <img src="${photoSrc}" alt="${name}" width="100" height="100" onclick="showImage('${photoSrc}')"><br>
-                <strong>Nombre del Equipo:</strong> ${name}<br>
-                <strong>Área del Equipo:</strong> ${row.dataset.area}<br>
-                <strong>Tipo:</strong> ${row.dataset.type}<br>
-                <strong>Subtipo:</strong> ${row.dataset.subType}<br>
-                <strong>Marca del Equipo:</strong> ${row.dataset.brand}<br>
-                <strong>Serial del Equipo:</strong> ${row.dataset.serial}<br>
-                <strong>Modelo del Equipo:</strong> ${row.dataset.model}<br>
-                <strong>Manual del Equipo (URL):</strong> <a href="${row.dataset.manual}" target="_blank">${row.dataset.manual}</a><br>
-                <strong>Fecha de Garantía:</strong> ${row.dataset.warrantyDate}<br>
-                <strong>Días Restantes de Garantía:</strong> ${row.dataset.warrantyDays}<br>
-            `;
-            
-            equipmentDetailsModal.style.display = "block";
+        const photoSrc = row.cells[0].querySelector("img").src; // Obtener la fuente de la imagen primaria
+        const name = row.cells[1].innerText;
+
+        // Actualiza el contenido del modal con detalles
+        equipmentDetailsContent.innerHTML = `
+            <img src="${photoSrc}" alt="${name}" width="100" height="100" onclick="openImageModal('${photoSrc}')"><br> 
+            <strong>Nombre del Equipo:</strong> ${name}<br>
+            <strong>Área del Equipo:</strong> ${row.dataset.area}<br>
+            <strong>Tipo:</strong> ${row.dataset.type}<br>
+            <strong>Subtipo:</strong> ${row.dataset.subType}<br>
+            <strong>Marca del Equipo:</strong> ${row.dataset.brand}<br>
+            <strong>Serial del Equipo:</strong> ${row.dataset.serial}<br>
+            <strong>Modelo del Equipo:</strong> ${row.dataset.model}<br>
+            <strong>Manual:</strong> ${row.dataset.manual}<br>
+            <strong>Fecha de Garantía:</strong> ${row.dataset.warrantyDate}<br>
+            <strong>Días de Garantía:</strong> ${row.dataset.warrantyDays}<br>
+        `;
+        
+        equipmentDetailsModal.style.display = "block"; // Abre el modal
         };
-
 
         // Cerrar el modal de detalles
         closeEquipmentDetailsModal.onclick = () => {
@@ -301,26 +298,72 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-        // Cerrar los modales al hacer clic fuera de él
-    window.onclick = function(event) {
-        if (event.target === addEquipmentModal) {
-            addEquipmentModal.style.display = "none";
-        }
-        if (event.target === addMaintenanceModal) {
-            addMaintenanceModal.style.display = "none";
-        }
-        if (event.target === addPartModal) {
-            addPartModal.style.display = "none";
-        }    
-        if (event.target === imageModal) {
-            imageModal.style.display = "none";
-        }
-        if (event.target === equipmentDetailsModal) {
-            equipmentDetailsModal.style.display = "none";
-        }
+    
+
+
+        // Función para abrir cualquier modal y desactivar el scroll
+    function openModal(modalElement) {
+        modalElement.style.display = "block";
+        document.body.classList.add("no-scroll"); // Desactiva el scroll
+    }
+
+    // Función para cerrar cualquier modal y restaurar el scroll
+    function closeModal(modalElement) {
+        modalElement.style.display = "none";
+        document.body.classList.remove("no-scroll"); // Activa el scroll nuevamente
+    }
+
+    // Abre el modal de agregar equipo
+    document.getElementById("addEquipmentBtn").addEventListener("click", () => {
+        openModal(addEquipmentModal);
+    });
+
+    // Cierra el modal de agregar equipo
+    closeEquipmentModal.onclick = () => {
+        closeModal(addEquipmentModal);
     };
 
+    // Abre el modal de agregar repuesto
+    document.getElementById("addPartBtn").addEventListener("click", () => {
+        openModal(addPartModal);
+    });
 
+    // Cierra el modal de agregar repuesto
+    closePartModal.onclick = () => {
+        closeModal(addPartModal);
+    };
+
+    // Abre el modal de imagen ampliada
+    window.showImage = function(image) {
+        expandedImage.src = image.src;
+        openModal(imageModal); // Utiliza la función para desactivar el scroll
+    };
+
+    // Cierra el modal de imagen ampliada
+    closeImageModal.onclick = () => {
+        closeModal(imageModal);
+    };
+
+    // Cierra el modal de detalles del equipo
+    closeEquipmentDetailsModal.onclick = () => {
+        closeModal(equipmentDetailsModal);
+    };
+
+    // Cerrar los modales al hacer clic fuera de ellos
+    window.onclick = function(event) {
+        if (event.target === addEquipmentModal) {
+            closeModal(addEquipmentModal);
+        }
+        if (event.target === addPartModal) {
+            closeModal(addPartModal);
+        }
+        if (event.target === imageModal) {
+            closeModal(imageModal);
+        }
+        if (event.target === equipmentDetailsModal) {
+            closeModal(equipmentDetailsModal);
+        }
+    };
 
     // Función para ver el historial de mantenimientos
     document.getElementById("viewHistoryBtn").addEventListener("click", () => {
@@ -335,6 +378,123 @@ document.addEventListener("DOMContentLoaded", () => {
         });
         alert(historyOutput);
     });
+
+
+    // codigo de equipo.html
+
+    document.getElementById("submitEquipmentBtn").onclick = function() {
+        // Obtener datos del formulario
+        const equipo = {
+            foto: document.getElementById("equipmentPhoto").files[0],
+            nombre: document.getElementById("equipmentName").value,
+            area: document.getElementById("equipmentArea").value,
+            tipo: document.getElementById("equipmentType").value,
+            subtipo: document.getElementById("equipmentSubtype").value,
+            marca: document.getElementById("equipmentBrand").value,
+            serial: document.getElementById("equipmentSerial").value,
+            modelo: document.getElementById("equipmentModel").value,
+            manual: document.getElementById("equipmentManual").value,
+            garantia: document.getElementById("equipmentWarranty").value
+        };
+
+        // Obtener equipos existentes y agregar el nuevo
+        const equipos = JSON.parse(localStorage.getItem('equipos')) || [];
+        equipos.push(equipo);
+        localStorage.setItem('equipos', JSON.stringify(equipos));
+
+        // Guardar el nuevo arreglo en localStorage
+        localStorage.setItem('equipos', JSON.stringify(equipos));
+
+        // Cerrar el modal
+        document.getElementById("closeEquipmentModal").click();
+    };
+    function mostrarEquipos(pagina) {
+        const equipos = obtenerEquipos();
+        const inicio = (pagina - 1) * itemsPorPagina;
+        const fin = inicio + itemsPorPagina;
+        const equiposPagina = equipos.slice(inicio, fin);
+
+        const lista = document.getElementById("equipmentList");
+        lista.innerHTML = ""; // Limpiar lista existente
+
+        equiposPagina.forEach((equipo, index) => {
+            const item = document.createElement("li");
+            item.className = "equipment-item";
+            item.innerHTML = `
+                <strong>Nombre:</strong> ${equipo.nombre} <br>
+                <strong>Área:</strong> ${equipo.area} <br>
+                <strong>Tipo:</strong> ${equipo.tipo} <br>
+                <strong>Subtipo:</strong> ${equipo.subtipo} <br>
+            `;
+            item.onclick = function() {
+                mostrarDetallesEquipo(index + inicio); // Pasar el índice correcto
+            };
+            lista.appendChild(item);
+        });
+
+        mostrarPaginacion(equipos.length);
+    }
+
+    //cerrar modal de detalles de equipos
+    function closeDetailsModal() {
+        document.getElementById("equipmentDetailsModal").style.display = "none";
+    }
+    
+
+    document.getElementById("submitEquipmentBtn").onclick = function() {
+        const equipo = {
+            foto: document.getElementById("equipmentPhoto").files[0],
+            nombre: document.getElementById("equipmentName").value,
+            area: document.getElementById("equipmentArea").value,
+            tipo: document.getElementById("equipmentType").value,
+            subtipo: document.getElementById("equipmentSubtype").value,
+            marca: document.getElementById("equipmentBrand").value,
+            serial: document.getElementById("equipmentSerial").value,
+            modelo: document.getElementById("equipmentModel").value,
+            manual: document.getElementById("equipmentManual").value,
+            garantia: document.getElementById("equipmentWarranty").value
+        };
+    
+        const equipos = JSON.parse(localStorage.getItem('equipos')) || [];
+        equipos.push(equipo);
+        localStorage.setItem('equipos', JSON.stringify(equipos));
+        document.getElementById("closeEquipmentModal").click();
+    };
+
+
+
+
 });
 
+// Función para llenar los selectores de área, tipo y subtipo
+const fillSelectOptions = () => {
+    const equipmentAreaSelect = document.getElementById('equipmentArea');
+    const equipmentTypeSelect = document.getElementById('equipmentType');
+    const equipmentSubtypeSelect = document.getElementById('equipmentSubtype');
 
+    // Limpiar opciones existentes en los selectores
+    equipmentAreaSelect.innerHTML = '<option value="">Selecciona un área</option>';
+    equipmentTypeSelect.innerHTML = '<option value="">Selecciona un tipo</option>';
+    equipmentSubtypeSelect.innerHTML = '<option value="">Selecciona un subtipo</option>';
+
+    // Cargar opciones desde Local Storage
+    const savedOptions = JSON.parse(localStorage.getItem('options')) || [];
+
+    // Filtrar y agregar opciones a cada selector según el tipo
+    savedOptions.forEach(option => {
+        const optionElement = document.createElement('option');
+        optionElement.value = option.value;
+        optionElement.textContent = option.value;
+
+        if (option.type === 'Área') {
+            equipmentAreaSelect.appendChild(optionElement);
+        } else if (option.type === 'Tipo') {
+            equipmentTypeSelect.appendChild(optionElement);
+        } else if (option.type === 'Subtipo') {
+            equipmentSubtypeSelect.appendChild(optionElement);
+        }
+    });
+};
+
+// Llamar a fillSelectOptions al cargar la página
+document.addEventListener('DOMContentLoaded', fillSelectOptions);

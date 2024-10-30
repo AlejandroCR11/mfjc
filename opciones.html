@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Mantenimiento</title>
+    <!-- icono -->
+    <link rel="shortcut icon" href="img/logo.png">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Gestión de Opciones de Equipos</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="opciones.html">Etiquetas</a></li>
+            <!--    <li><a href="equipos.html">Equipos</a></li> -->
+                <li><a href="inventario.html">Inventario de Repuestos</a></li>
+            <!--    <li><a href="#calendario">Calendario de Mantenimiento</a></li>  -->
+            <!--    <li><a href="#reportes">Reportes</a></li> -->
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="addOptions">
+            <h2>Agregar Nueva Opción</h2>
+
+            <label for="searchInput">Buscar Opción:</label>
+            <input type="text" id="searchInput" placeholder="Buscar por nombre">
+            <h2> </h2>
+            <label for="optionType">Tipo de Opción:</label>
+            <select id="optionType">
+                <option value="Área">Área</option>
+                <option value="Tipo">Tipo</option>
+                <option value="Subtipo">Subtipo</option>
+            </select>
+
+            <label for="optionValue">Valor de Opción:</label>
+            <input type="text" id="optionValue" placeholder="Valor de opción" required>
+            <button id="addOptionBtn">Agregar Opción</button>
+        </section>
+
+        <section id="optionsList">
+            <h2>Opciones Agregadas</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tipo</th>
+                        <th>Nombre</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="optionsTableBody">
+                    <!-- Las opciones se agregarán aquí -->
+                </tbody>
+            </table>
+            
+            <div class="pagination">
+                <button id="prevPageBtn" disabled>Anterior</button>
+                <div id="pageNumbers"></div>
+                <button id="nextPageBtn" disabled>Siguiente</button>
+            </div>
+            <p id="pageInfo"></p>
+
+         
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2024 Jacinto Convit Foundation. Todos los derechos reservados.</p>
+    </footer>
+
+  
+
+    <script src="js/opciones.js"></script>
+</body>
+</html>

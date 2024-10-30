@@ -1,0 +1,28 @@
+/* Estilos para los botones de paginación */
+.pagination {
+    display: flex;
+    justify-content: center; /* Centra los botones horizontalmente */
+    margin: 20px 0; /* Espaciado arriba y abajo */
+}
+
+.pagination button {
+    background-color: #007bff; /* Color de fondo del botón */
+    color: white; /* Color del texto */
+    border: none; /* Sin borde */
+    padding: 10px 15px; /* Espaciado interno */
+    margin: 0 5px; /* Espaciado entre botones */
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
+    transition: background-color 0.3s; /* Transición suave para el color de fondo */
+}
+
+/* Cambiar color de fondo al pasar el cursor */
+.pagination button:hover {
+    background-color: #0056b3; /* Color de fondo al pasar el cursor */
+}
+
+/* Estilo para botones deshabilitados */
+.pagination button:disabled {
+    background-color: #c0c0c0; /* Color de fondo para botones deshabilitados */
+    cursor: not-allowed; /* Cambia el cursor para indicar que no se puede hacer clic */
+}
