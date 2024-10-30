@@ -10,8 +10,13 @@
 </head>
 <body>
     <header>
+        <img src="img/logo.png" alt="Logo" id="headerLogo">
+        <div class="header-content">
         <h1>Gestión de Opciones de Equipos</h1>
+    </div>
+        
         <nav>
+        
             <ul>
                 <li><a href="index.html">Inicio</a></li>
                 <li><a href="opciones.html">Etiquetas</a></li>
@@ -26,7 +31,6 @@
     <main>
         <section id="addOptions">
             <h2>Agregar Nueva Opción</h2>
-
             <label for="searchInput">Buscar Opción:</label>
             <input type="text" id="searchInput" placeholder="Buscar por nombre">
             <h2> </h2>
@@ -37,8 +41,8 @@
                 <option value="Subtipo">Subtipo</option>
             </select>
 
-            <label for="optionValue">Valor de Opción:</label>
-            <input type="text" id="optionValue" placeholder="Valor de opción" required>
+            <label for="optionValue">Nombre de Opción:</label>
+            <input type="text" id="optionValue" placeholder="Nombre de opción" required>
             <button id="addOptionBtn">Agregar Opción</button>
         </section>
 
