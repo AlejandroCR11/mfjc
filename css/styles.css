@@ -36,6 +36,36 @@ header h1 {
 }
 
 
+/* Media query para pantallas más pequeñas */
+@media (max-width: 768px) {
+    #headerLogo {
+        width: 60px; /* Reduce el tamaño del logo en móviles */
+        margin-right: 10px; /* Ajusta el margen en móviles */
+    }
+
+    header h1 {
+        font-size: 20px; /* Reduce el tamaño de la fuente del título en móviles */
+    }
+
+    /* Opcional: Cambiar la alineación del header en móviles */
+    header {
+        flex-direction: column; /* Cambia a columna para apilar logo y título */
+        align-items: center; /* Centra todos los elementos */
+    }
+}
+
+/* Media query para pantallas aún más pequeñas */
+@media (max-width: 480px) {
+    #headerLogo {
+        width: 50px; /* Reduce aún más el tamaño del logo en pantallas muy pequeñas */
+    }
+
+    header h1 {
+        font-size: 18px; /* Reduce el tamaño de la fuente aún más */
+    }
+}
+
+
 /* Asegura que el main ocupe el espacio disponible entre el header y el footer */
 main {
     flex: 1;
@@ -238,6 +268,33 @@ nav ul li a {
     background-color: #ffffff; /* Color de fondo del botón */
     transition: all 0.5s ease; /* Transición para cambios suaves */
     position: relative;
+}
+
+
+/* Media query para pantallas más pequeñas */
+@media (max-width: 768px) {
+    nav ul {
+        flex-direction: column; /* Cambia la dirección de los botones a columna */
+        align-items: center; /* Centra los botones */
+        gap: 15px; /* Aumenta el espacio entre botones cuando están apilados */
+    }
+
+    nav ul li a {
+        font-size: 14px; /* Ajusta el tamaño del texto */
+        padding: 8px 12px; /* Reduce el padding para que se vea más compacto */
+    }
+}
+
+/* Media query para pantallas aún más pequeñas */
+@media (max-width: 480px) {
+    header {
+        padding: 5px 0; /* Reduce el padding en móviles */
+    }
+
+    nav ul li a {
+        padding: 6px 10px; /* Reduce aún más el padding */
+        font-size: 12px; /* Ajusta el tamaño del texto para móviles */
+    }
 }
 
 /* Efecto de hover */
@@ -527,7 +584,7 @@ nav ul li a:active {
 
 /* Estilos para la barra de búsqueda  */
 #searchInput {
-    width: 100%;
+    width: 80%;
     max-width: 450px;
     padding: 12px 15px;
     font-size: 16px;
