@@ -87,7 +87,7 @@ footer {
     padding: 1em;
     background: #333;
     color: #fff; 
-    width: auto;
+    width: 98%;
     height: 81px;
     position: absolute; /* Cambiado para evitar solapamientos con el contenido */ 
     bottom: 0;
