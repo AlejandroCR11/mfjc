@@ -113,17 +113,18 @@ document.addEventListener("DOMContentLoaded", () => {
                 nameCell.innerText = equipmentName;
 
                 actionsCell.innerHTML = `
-                    <button onclick="showEquipmentDetails(this)">Ver detalles</button>
-                    <button onclick="showMaintenanceForm(this)">Mantenimiento</button>
-                    <button onclick="deleteEquipment(this)">Eliminar</button>
-                `;
-
+                <button class="button button-view" onclick="showEquipmentDetails(this)">Ver detalles</button>
+                <button class="button button-maintenance" onclick="showMaintenanceForm(this)">Mantenimiento</button>
+                <button class="button button-delete" onclick="deleteEquipment(this)">Eliminar</button>
+            `;
+                
+                
                 addEquipmentModal.style.display = "none"; 
                 equipmentPhotoInput.value = "";
                 document.getElementById("equipmentName").value = "";
-                document.getElementById("equipmentArea").value = "producción";
-                document.getElementById("equipmentType").value = "máquina";
-                document.getElementById("equipmentSubtype").value = "electrónico";
+                document.getElementById("equipmentArea").value = "";
+                document.getElementById("equipmentType").value = "";
+                document.getElementById("equipmentSubtype").value = "";
                 document.getElementById("equipmentBrand").value = "";
                 document.getElementById("equipmentSerial").value = "";
                 document.getElementById("equipmentModel").value = "";
@@ -204,7 +205,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 updateMaintenanceStats();
                 alert(`Mantenimiento agregado:\nTipo: ${tipoMantenimiento}\nFecha: ${fechaMantenimiento}\nDescripción: ${descripcionMantenimiento}`);
                 addMaintenanceModal.style.display = "none"; 
-                document.getElementById("tipoMantenimiento").value = "preventivo"; 
+                document.getElementById("tipoMantenimiento").value = "preventivo "; 
                 document.getElementById("fechaMantenimiento").value = ""; 
                 document.getElementById("descripcionMantenimiento").value = ""; 
             } else {
@@ -362,6 +363,9 @@ document.addEventListener("DOMContentLoaded", () => {
         if (event.target === equipmentDetailsModal) {
             closeModal(equipmentDetailsModal);
         }
+        if (event.target === addMaintenanceModal) {
+            closeModal(addMaintenanceModal);
+        }
     };
 
     // Función para ver el historial de mantenimientos
@@ -465,6 +469,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 
+
+
 // Función para llenar los selectores de área, tipo y subtipo
 const fillSelectOptions = () => {
     const equipmentAreaSelect = document.getElementById('equipmentArea');
@@ -492,6 +498,7 @@ const fillSelectOptions = () => {
         } else if (option.type === 'Subtipo') {
             equipmentSubtypeSelect.appendChild(optionElement);
         }
+        
     });
 };
 

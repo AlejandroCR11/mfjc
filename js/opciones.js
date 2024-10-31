@@ -57,8 +57,11 @@ const renderTable = () => {
     // Agregar las opciones de la página actual
     for (let i = startIndex; i < endIndex; i++) {
         const newRow = optionsTableBody.insertRow();
-        newRow.insertCell(0).innerText = filteredOptions[i].type;
-        newRow.insertCell(1).innerText = filteredOptions[i].value;
+        newRow.insertCell(0).className = 'tipo'; // Columna Tipo
+        newRow.cells[0].innerText = filteredOptions[i].type; // Establecer el valor
+
+        newRow.insertCell(1).className = 'nombre'; // Columna Nombre
+        newRow.cells[1].innerText = filteredOptions[i].value; // Establecer el valor
 
         // Crear el botón de eliminar
         const deleteBtn = document.createElement('button');
@@ -69,8 +72,10 @@ const renderTable = () => {
                 renderTable(); // Volver a renderizar la tabla
             }
         };
+        // Agregar la clase al botón
+        deleteBtn.classList.add('button-delete-options');
 
-        newRow.insertCell(2).appendChild(deleteBtn);
+        newRow.insertCell(2).appendChild(deleteBtn); // Columna Acciones
     }
 
     // Actualizar información de la página
