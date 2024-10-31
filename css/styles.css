@@ -239,6 +239,15 @@ button:hover {
     padding: 0 4px;
 }
 
+@media (max-width: 768px) {
+    .button-view,
+    .button-maintenance,
+    .button-delete {
+        display: flex; /* Usar flexbox para una mejor alineación */
+        font-size: 15px;
+        
+}
+}
 
 
 /* Estilos adicionales para modales */
