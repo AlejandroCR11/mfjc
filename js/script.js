@@ -95,8 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 const row = equipmentTableBody.insertRow();
                 const photoCell = row.insertCell(0);
                 const nameCell = row.insertCell(1);
-                const detailsCell = row.insertCell(2);
-                const actionsCell = row.insertCell(3);
+                const actionsCell = row.insertCell(2);
 
                 // Asignar datos a la fila usando dataset
                 row.dataset.area = equipmentArea;
