@@ -167,7 +167,7 @@ button {
     background-color: #293a60;
     color: rgb(242, 242, 242);
     border: none;
-    padding: 0 20px;
+    padding: 3px 8px;
     line-height: 38px;
     border-radius: 10px;
     -webkit-box-shadow: -2px 3px 0px #d4d4d4;
@@ -188,6 +188,57 @@ button {
 button:hover {
     background-color: #0b0f2a;
 }
+
+.button-view {
+    background-color: #37873a; /* Verde */
+}
+
+.button-maintenance {
+    background-color: #223db3; /* Azul */
+
+
+}
+
+.button-delete {
+    background-color: #b13229; /* Rojo */
+
+ 
+}
+
+.button-delete-options {
+    background-color: #b13229; /* Rojo */
+    float: right; /* Alinear a la derecha */
+
+}
+
+.button-delete {
+    background-color: #b13229; /* Rojo */
+
+}
+
+
+.button-delete-part{
+    background-color: #b13229; /* Rojo */
+    
+    
+}
+
+
+.button-container {
+    display: flex; /* Habilita el flexbox */
+    justify-content: flex-end; /* Alinea los botones a la derecha */
+    gap: 10px; /* Espacio entre los botones */
+}
+
+.button-delete-options,
+.button-view,
+.button-maintenance,
+.button-delete {
+    /* Otros estilos de botones aquí */
+    position: relative; /* Opcional, dependiendo de tus estilos */
+    padding: 0 4px;
+}
+
 
 
 /* Estilos adicionales para modales */
@@ -582,6 +633,82 @@ nav ul li a:active {
 }
 
 
+
+/* Estilos específicos para dispositivos móviles */
+@media (max-width: 768px) {
+    .pagination {
+        display: flex; /* Usar flexbox para una mejor alineación */
+        justify-content: center; /* Centrar los elementos en el contenedor */
+        align-items: center; /* Centrar verticalmente los botones */
+        margin: 10px 0; /* Espaciado superior e inferior */
+    }
+
+    .pagination button {
+        padding: 8px 10px; /* Espaciado interno adecuado para botones */
+        margin: 0; /* Sin margen adicional entre botones */
+        font-size: 14px; /* Tamaño de fuente adecuado para móviles */
+        flex: 0 0 auto; /* Tamaño ajustado al contenido del botón */
+        border-radius: 5px; /* Bordes redondeados para un estilo moderno */
+        background-color: #007bff; /* Color de fondo por defecto */
+        color: white; /* Color de texto */
+        border: none; /* Sin borde para un diseño más limpio */
+        cursor: pointer; /* Cambiar cursor al pasar por encima */
+        transition: background-color 0.3s, transform 0.2s; /* Transiciones suaves */
+        font-weight: bold; /* Texto en negrita para mejor legibilidad */
+        width: 30%; /* Ajustar el ancho según el diseño deseado */
+    }
+
+    /* Cambiar color de fondo al pasar el cursor */
+    .pagination button:hover {
+        background-color: #0056b3; /* Color más oscuro al pasar el ratón */
+        transform: scale(1.05); /* Aumentar ligeramente el tamaño al pasar el ratón */
+    }
+
+    /* Estilo para botones deshabilitados */
+    .pagination button:disabled {
+        background-color: #c0c0c0; /* Color para botones deshabilitados */
+        cursor: not-allowed; /* Cambiar cursor al pasar por encima */
+        opacity: 0.6; /* Reducir opacidad para indicar que está deshabilitado */
+    }
+
+    /* Estilo para el número de página actual */
+    .pagination .active {
+        background-color: #ff5252; /* Color diferente para la página actual */
+        color: white; /* Asegúrate de que el texto sea legible */
+        font-weight: bold; /* Resaltar el texto */
+        border-radius: 5px; /* Bordes redondeados */
+        padding: 8px 10px; /* Igualar tamaño con los botones de paginación */
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Sombra sutil para un efecto de profundidad */
+    }
+
+    /* Estilos para los números de página */
+    .pagination .page-number {
+        margin: 0 5px; /* Espaciado horizontal entre los números */
+        padding: 8px 10px; /* Espaciado interno para los números */
+        border-radius: 5px; /* Bordes redondeados */
+        background-color: #f0f0f0; /* Color de fondo para los números */
+        color: #333; /* Color de texto */
+        cursor: pointer; /* Cambiar cursor al pasar por encima */
+        transition: background-color 0.3s; /* Transición suave para el color de fondo */
+    }
+
+    .pagination .page-number:hover {
+        background-color: #e0e0e0; /* Color de fondo al pasar el ratón */
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* Estilos para la barra de búsqueda  */
 #searchInput {
     width: 80%;
@@ -625,16 +752,15 @@ nav ul li a:active {
 
 #searchInput:focus {
     background-color: #ffffff;
-    box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+    box-shadow: 0 0 8px rgba(12, 119, 233, 0.3);
     outline: none;
 }
 
 
-
 /* Estilo para las celdas del encabezado del creador de opciones */
 thead {
-    background-color: #4CAF50; /* Color de fondo del encabezado */
-    color: white; /* Color del texto del encabezado */
+    background-color: #0000006c; /* Color de fondo del encabezado */
+    color: rgb(255, 255, 255); /* Color del texto del encabezado */
 }
 
 
@@ -751,4 +877,76 @@ label[for="optionValue"] {
 }
 
 
+
+
+/* CSS para la tabla */ 
+table {
+    width: 100%; /* Asegura que la tabla ocupe el ancho completo */
+ 
+}
+/* Fija la tabla para que el contenido no se ajuste a la altura */
+table {
+    border-collapse: collapse; /* Elimina los espacios entre las celdas */
+}
+
+td {
+    overflow: hidden; /* Oculta el contenido que desborda la celda */
+    text-overflow: ellipsis; /* Muestra "..." si el texto es demasiado largo */
+    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+}
+
+/* Ancho específico para cada columna */
+td.tipo {
+    width: 1px; /* Cambia esto al ancho que prefieras */
+}
+
+td.nombre {
+    width: 1px; /* Cambia esto al ancho que prefieras */
+}
+
+td.acciones {
+    width: 1px; /* Cambia esto al ancho que prefieras */
+}
+
+/* Estilo adicional para las celdas */
+td, th {
+    padding: 5px; /* Espaciado interno para celdas */
+    border: 3px solid #cfcfcf; /* Bordes de las celdas */
+}
+
+/* Estilos para las celdas */
+th, td {
+    padding: 8px; /* Espaciado interno para celdas */
+    border: 1px solid #ddd; /* Bordes de las celdas */
+    overflow: hidden; /* Oculta el contenido que desborda la celda */
+    text-overflow: ellipsis; /* Muestra "..." si el texto es demasiado largo */
+    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+}
+
+/* Ancho específico para la columna Nombre */
+th:nth-child(2), td:nth-child(2) {
+    width: 250px; /* Cambia esto al ancho que prefieras */
+    max-width: 700px; /* Establece un ancho máximo */
+}
+
+/* CSS base para la tabla */
+table {
+    width: 100%; /* Asegura que la tabla ocupe el ancho completo */
+    border-collapse: collapse; /* Elimina los espacios entre las celdas */
+}
+
+/* Estilos para las celdas */
+th, td {
+    padding: 8px; /* Espaciado interno para celdas */
+    border: 1px solid #ddd; /* Bordes de las celdas */
+    overflow: hidden; /* Oculta el contenido que desborda la celda */
+    text-overflow: ellipsis; /* Muestra "..." si el texto es demasiado largo */
+    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+}
+
+/* Ancho específico para la columna Nombre */
+th:nth-child(2), td:nth-child(2) {
+    width: 250px; /* Cambia esto al ancho que prefieras */
+    max-width: 250px; /* Establece un ancho máximo */
+}
 
