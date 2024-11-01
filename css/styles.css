@@ -11,8 +11,8 @@ html, body {
 header {
     display: flex;
     align-items: center; /* Centra verticalmente el contenido */
-    background: #09091d;
-    color: #fff;
+    background: #d2d8e1;
+    color: #080808;
     padding: 15px;
     text-align: center;
 
@@ -164,7 +164,7 @@ th, td {
 }
 
 button {
-    background-color: #293a60;
+    background-color: #04245c;
     color: rgb(242, 242, 242);
     border: none;
     padding: 3px 8px;
@@ -359,7 +359,7 @@ nav ul li a {
 
 /* Efecto de hover */
 nav ul li a:hover {
-    background-color: #b92929; /* Color de fondo al pasar el ratón */
+    background-color: #29b948; /* Color de fondo al pasar el ratón */
     color: #ffffff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra al pasar el mouse */
     transition: background-color 0.1s ease, transform 1s ease; /* Cambia la duración a 0.1s */
@@ -367,10 +367,11 @@ nav ul li a:hover {
 }
 
 /* Efecto de fondo en cada enlace al hacer clic */
-nav ul li a:active {
-    background-color: #00ff40; /* Color al hacer clic */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Reduce la sombra */
-    transform: translateY(1px); /* Efecto de clic */
+nav ul li a.active {
+    background-color: #1c2b53; /* Color de fondo cuando está activo */
+    color: #ffffff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    transform: translateY(1px);
 }
 /* Estilo para el Panel de Control */
 #panelControl {
@@ -653,8 +654,8 @@ nav ul li a:active {
     }
 
     .pagination button {
-        padding: 8px 10px; /* Espaciado interno adecuado para botones */
-        margin: 0; /* Sin margen adicional entre botones */
+        padding: 2px 8px; /* Espaciado interno adecuado para botones */
+        margin: 4px 2px; /* Sin margen adicional entre botones */
         font-size: 14px; /* Tamaño de fuente adecuado para móviles */
         flex: 0 0 auto; /* Tamaño ajustado al contenido del botón */
         border-radius: 5px; /* Bordes redondeados para un estilo moderno */
@@ -709,15 +710,6 @@ nav ul li a:active {
 
 
 
-
-
-
-
-
-
-
-
-
 /* Estilos para la barra de búsqueda  */
 #searchInput {
     width: 80%;
@@ -768,8 +760,8 @@ nav ul li a:active {
 
 /* Estilo para las celdas del encabezado del creador de opciones */
 thead {
-    background-color: #0000006c; /* Color de fondo del encabezado */
-    color: rgb(255, 255, 255); /* Color del texto del encabezado */
+    background-color: #d2d8e1; /* Color de fondo del encabezado */
+    color: #022759; /* Color del texto del encabezado */
 }
 
 
@@ -955,7 +947,14 @@ th, td {
 
 /* Ancho específico para la columna Nombre */
 th:nth-child(2), td:nth-child(2) {
-    width: 250px; /* Cambia esto al ancho que prefieras */
+    width: 100%; /* Cambia esto al ancho que prefieras */
     max-width: 250px; /* Establece un ancho máximo */
+}
+
+@media (max-width: 768px) {
+    th:nth-child(2), td:nth-child(2) {
+        width: 250px; /* Cambia esto al ancho que prefieras */
+        max-width: 250px; /* Establece un ancho máximo */
+    }
 }
 

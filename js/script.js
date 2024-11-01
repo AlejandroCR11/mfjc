@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+    const botones = document.querySelectorAll("button");
     const equipmentTableBody = document.querySelector("#equipmentTable tbody");
     const partsTableBody = document.querySelector("#partsTable tbody");
     const maintenanceStats = {
@@ -6,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
         overdue: 0,
         history: []
     };
+
 
     // Modal y botón de agregar equipo
     const addEquipmentModal = document.getElementById("addEquipmentModal");

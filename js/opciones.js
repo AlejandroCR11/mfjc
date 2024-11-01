@@ -1,5 +1,5 @@
 const options = []; // Array para almacenar las opciones
-const itemsPerPage = 5; // Número de opciones por página
+const itemsPerPage = 6; // Número de opciones por página
 let currentPage = 1;
 let searchQuery = ''; // Almacena la consulta de búsqueda
 
@@ -92,7 +92,7 @@ const renderTable = () => {
 // Función para renderizar la paginación numérica
 const renderPageNumbers = (totalPages) => {
     pageNumbers.innerHTML = ''; // Limpiar los botones de números de página
-    const maxVisibleButtons = 5; // Número máximo de botones de página a mostrar
+    const maxVisibleButtons = 6; // Número máximo de botones de página a mostrar
     let startButton = Math.max(1, currentPage - 2); // Comenzar a mostrar 2 botones antes de la página actual
     let endButton = Math.min(totalPages, startButton + maxVisibleButtons - 1); // Terminar en 5 botones
 
