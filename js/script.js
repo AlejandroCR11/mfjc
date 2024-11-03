@@ -1,24 +1,17 @@
 document.addEventListener("DOMContentLoaded", () => {
     const botones = document.querySelectorAll("button");
     const equipmentTableBody = document.querySelector("#equipmentTable tbody");
-    const partsTableBody = document.querySelector("#partsTable tbody");
     const maintenanceStats = {
         upcoming: 0,
         overdue: 0,
         history: []
     };
 
-
     // Modal y botón de agregar equipo
     const addEquipmentModal = document.getElementById("addEquipmentModal");
     const submitEquipmentBtn = document.getElementById("submitEquipmentBtn");
     const closeEquipmentModal = document.getElementById("closeEquipmentModal");
 
-    // Modal y botón de agregar repuesto
-    const addPartModal = document.getElementById("addPartModal");
-    const submitPartBtn = document.getElementById("submitPartBtn");
-    const closePartModal = document.getElementById("closePartModal");
-    
     const addMaintenanceModal = document.getElementById("addMaintenanceModal");
     const closeMaintenanceModal = document.getElementById("closeMaintenanceModal");
     const submitMaintenanceBtn = document.getElementById("submitMaintenanceBtn");
@@ -35,20 +28,12 @@ document.addEventListener("DOMContentLoaded", () => {
         addEquipmentModal.style.display = "block";
     });
 
-    document.getElementById("addPartBtn").addEventListener("click", () => {
-        addPartModal.style.display = "block";
-    });
-
     closeEquipmentModal.onclick = () => {
         addEquipmentModal.style.display = "none";
     };
 
     closeMaintenanceModal.onclick = () => {
         addMaintenanceModal.style.display = "none";
-    };
-
-    closePartModal.onclick = () => {
-        addPartModal.style.display = "none";
     };
 
     closeImageModal.onclick = () => {
@@ -119,8 +104,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <button class="button button-maintenance" onclick="showMaintenanceForm(this)">Mantenimiento</button>
                 <button class="button button-delete" onclick="deleteEquipment(this)">Eliminar</button>
             `;
-                
-                
+
                 addEquipmentModal.style.display = "none"; 
                 equipmentPhotoInput.value = "";
                 document.getElementById("equipmentName").value = "";
@@ -139,96 +123,12 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    submitPartBtn.addEventListener("click", () => {
-        const partPhotoInput = document.getElementById("partPhoto");
-        const partName = document.getElementById("partName").value;
-        const partQuantity = document.getElementById("partQuantity").value;
-    
-        if (partPhotoInput.files.length > 0 && partName && partQuantity) {
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                const row = partsTableBody.insertRow();
-                const photoCell = row.insertCell(0);
-                const nameCell = row.insertCell(1);
-                const quantityCell = row.insertCell(2);
-                const actionsCell = row.insertCell(3);
-    
-                photoCell.innerHTML = `<img src="${e.target.result}" alt="${partName}" width="50" height="50" onclick="showImage(this)">`;
-                nameCell.innerText = partName;
-                quantityCell.innerHTML = `<span class="part-quantity">${partQuantity}</span>`;
-                actionsCell.innerHTML = `
-                    <button onclick="incrementQuantity(this)">+</button>
-                    <button onclick="decrementQuantity(this)">-</button>
-                    <button onclick="deletePart(this)">Eliminar</button>
-                `;
-    
-                addPartModal.style.display = "none";
-                partPhotoInput.value = "";
-                document.getElementById("partName").value = "";
-                document.getElementById("partQuantity").value = "";
-            };
-            reader.readAsDataURL(partPhotoInput.files[0]);
-        } else {
-            alert("Por favor, complete todos los campos obligatorios.");
-        }
-    });
-
-
-
-    window.deleteRow = function(button) {
-        const row = button.parentNode.parentNode;
-        row.parentNode.removeChild(row);
-    };
-
-    window.showMaintenanceForm = function(button) {
-        addMaintenanceModal.style.display = "block"; // Mostrar el modal de mantenimiento
-
-        // Asignar la funcionalidad de agregar mantenimiento al botón del modal
-        submitMaintenanceBtn.onclick = function() {
-            const tipoMantenimiento = document.getElementById("tipoMantenimiento").value;
-            const fechaMantenimiento = document.getElementById("fechaMantenimiento").value;
-            const descripcionMantenimiento = document.getElementById("descripcionMantenimiento").value;
-
-            if (tipoMantenimiento && fechaMantenimiento && descripcionMantenimiento) {
-                maintenanceStats.history.push({
-                    tipo: tipoMantenimiento,
-                    fecha: new Date(fechaMantenimiento),
-                    descripcion: descripcionMantenimiento
-                });
-
-                // Actualizar estadísticas
-                const today = new Date();
-                if (new Date(fechaMantenimiento) >= today) {
-                    maintenanceStats.upcoming++;
-                } else {
-                    maintenanceStats.overdue++;
-                }
-                
-                updateMaintenanceStats();
-                alert(`Mantenimiento agregado:\nTipo: ${tipoMantenimiento}\nFecha: ${fechaMantenimiento}\nDescripción: ${descripcionMantenimiento}`);
-                addMaintenanceModal.style.display = "none"; 
-                document.getElementById("tipoMantenimiento").value = "preventivo "; 
-                document.getElementById("fechaMantenimiento").value = ""; 
-                document.getElementById("descripcionMantenimiento").value = ""; 
-            } else {
-                alert("Por favor, complete todos los campos obligatorios.");
-            }
-        };
-    };
-
-        // Función para eliminar un equipo
-        window.deleteEquipment = function(button) {
+    window.deleteEquipment = function(button) {
+        if (confirm("¿Estás seguro de que deseas eliminar este equipo?")) {
             const row = button.parentNode.parentNode;
             row.parentNode.removeChild(row);
-        };
-
-                // Función para confirma eliminacion de un equipo
-        window.deleteEquipment = function(button) {
-            if (confirm("¿Estás seguro de que deseas eliminar este equipo?")) {
-                const row = button.parentNode.parentNode;
-                row.parentNode.removeChild(row);
-            }
-        };
+        }
+    };
 
     // Mostrar los detalles del equipo
     window.showEquipmentDetails = function(button) {
@@ -251,47 +151,71 @@ document.addEventListener("DOMContentLoaded", () => {
             <strong>Fecha de Garantía:</strong> ${row.dataset.warrantyDate}<br>
             <strong>Días de Garantía:</strong> ${row.dataset.warrantyDays}<br>
         `;
-        
+
         equipmentDetailsModal.style.display = "block"; // Abre el modal
-        };
+    };
 
-        // Cerrar el modal de detalles
-        closeEquipmentDetailsModal.onclick = () => {
-            equipmentDetailsModal.style.display = "none";
-        };
+    // Cerrar el modal de detalles
+    closeEquipmentDetailsModal.onclick = () => {
+        equipmentDetailsModal.style.display = "none";
+    };
 
-
-
-        // Función para incrementar la cantidad del repuesto
-        window.incrementQuantity = function(button) {
-            const quantityCell = button.parentNode.parentNode.cells[2];
-            const quantitySpan = quantityCell.querySelector(".part-quantity");
-            let quantity = parseInt(quantitySpan.innerText);
-            quantitySpan.innerText = ++quantity;
-        };
+    window.showMaintenanceForm = function(button) {
+        const row = button.closest("tr"); // Obtener la fila del equipo
+        const equipmentName = row.cells[1].innerText; // Obtener el nombre del equipo desde la segunda celda (ajusta si es necesario)
     
-        // Función para decrementar la cantidad del repuesto
-        window.decrementQuantity = function(button) {
-            const quantityCell = button.parentNode.parentNode.cells[2];
-            const quantitySpan = quantityCell.querySelector(".part-quantity");
-            let quantity = parseInt(quantitySpan.innerText);
-            if (quantity > 1) {
-                quantitySpan.innerText = --quantity;
-            }
-        };
+        // Muestra el nombre del equipo en el modal
+        if (document.getElementById("equipmentNameForMaintenance")) {
+            document.getElementById("equipmentNameForMaintenance").innerText = equipmentName;
+        }
     
-        // Función para eliminar un repuesto
-        window.deletePart = function(button) {
-            const row = button.parentNode.parentNode;
-            row.parentNode.removeChild(row);
-        };
-                // Función para confirma eliminacion de un repuesto
-        window.deletePart = function(button) {
-            if (confirm("¿Estás seguro de que deseas eliminar este repuesto?")) {
-                const row = button.parentNode.parentNode;
-                row.parentNode.removeChild(row);
-            }
-        };
+        addMaintenanceModal.style.display = "block";
+
+        
+    
+        // Asignar la funcionalidad de agregar mantenimiento al botón del modal
+        submitMaintenanceBtn.onclick = function() {
+            const tipoMantenimiento = document.getElementById("tipoMantenimiento").value;
+            const fechaMantenimiento = document.getElementById("fechaMantenimiento").value;
+            const descripcionMantenimiento = document.getElementById("descripcionMantenimiento").value;
+    
+            if (tipoMantenimiento && fechaMantenimiento && descripcionMantenimiento) {
+                const nuevoMantenimiento = {
+                    equipo: equipmentName, // Incluye el nombre del equipo
+                    tipo: tipoMantenimiento,
+                    date: fechaMantenimiento,
+                    descripcion: descripcionMantenimiento
+                };
+    
+
+                // Actualizar estadísticas
+                const today = new Date();
+                if (new Date(fechaMantenimiento) >= today) {
+                    maintenanceStats.upcoming++;
+                } else {
+                    maintenanceStats.overdue++;
+                }
+
+                updateMaintenanceStats();
+                
+            // Guardar el mantenimiento en el localStorage
+            const existingMaintenances = JSON.parse(localStorage.getItem('maintenances')) || [];
+            existingMaintenances.push(nuevoMantenimiento);
+            localStorage.setItem('maintenances', JSON.stringify(existingMaintenances));
+
+            alert(`Mantenimiento agregado para el equipo "${equipmentName}":\nTipo: ${tipoMantenimiento}\nFecha: ${fechaMantenimiento}\nDescripción: ${descripcionMantenimiento}`);
+            addMaintenanceModal.style.display = "none";
+
+            document.getElementById("tipoMantenimiento").value = "";
+            document.getElementById("fechaMantenimiento").value = "";
+            document.getElementById("descripcionMantenimiento").value = "";
+
+            initializeCalendar(); // Recargar el calendario para reflejar el nuevo mantenimiento
+        } else {
+            alert("Por favor, complete todos los campos obligatorios.");
+        }
+    };
+};
 
     // Actualiza las estadísticas de mantenimiento en el panel de control
     function updateMaintenanceStats() {
@@ -299,179 +223,25 @@ document.addEventListener("DOMContentLoaded", () => {
         document.querySelector("#overdueMaintenanceCount span").innerText = maintenanceStats.overdue;
     }
 
-
-    
-
-
-        // Función para abrir cualquier modal y desactivar el scroll
-    function openModal(modalElement) {
-        modalElement.style.display = "block";
-        document.body.classList.add("no-scroll"); // Desactiva el scroll
-    }
-
-    // Función para cerrar cualquier modal y restaurar el scroll
-    function closeModal(modalElement) {
-        modalElement.style.display = "none";
-        document.body.classList.remove("no-scroll"); // Activa el scroll nuevamente
-    }
-
-    // Abre el modal de agregar equipo
-    document.getElementById("addEquipmentBtn").addEventListener("click", () => {
-        openModal(addEquipmentModal);
-    });
-
-    // Cierra el modal de agregar equipo
-    closeEquipmentModal.onclick = () => {
-        closeModal(addEquipmentModal);
-    };
-
-    // Abre el modal de agregar repuesto
-    document.getElementById("addPartBtn").addEventListener("click", () => {
-        openModal(addPartModal);
-    });
-
-    // Cierra el modal de agregar repuesto
-    closePartModal.onclick = () => {
-        closeModal(addPartModal);
-    };
-
-    // Abre el modal de imagen ampliada
-    window.showImage = function(image) {
-        expandedImage.src = image.src;
-        openModal(imageModal); // Utiliza la función para desactivar el scroll
-    };
-
-    // Cierra el modal de imagen ampliada
-    closeImageModal.onclick = () => {
-        closeModal(imageModal);
-    };
-
-    // Cierra el modal de detalles del equipo
-    closeEquipmentDetailsModal.onclick = () => {
-        closeModal(equipmentDetailsModal);
-    };
-
     // Cerrar los modales al hacer clic fuera de ellos
     window.onclick = function(event) {
         if (event.target === addEquipmentModal) {
-            closeModal(addEquipmentModal);
-        }
-        if (event.target === addPartModal) {
-            closeModal(addPartModal);
-        }
-        if (event.target === imageModal) {
-            closeModal(imageModal);
-        }
-        if (event.target === equipmentDetailsModal) {
-            closeModal(equipmentDetailsModal);
-        }
-        if (event.target === addMaintenanceModal) {
-            closeModal(addMaintenanceModal);
+            addEquipmentModal.style.display = "none"; 
+        } else if (event.target === equipmentDetailsModal) {
+            equipmentDetailsModal.style.display = "none";
+        } else if (event.target === addMaintenanceModal) {
+            addMaintenanceModal.style.display = "none"; 
+        } else if (event.target === imageModal) {
+            imageModal.style.display = "none"; 
+            document.body.style.overflow = ""; // Restaurar el scroll del fondo
         }
     };
 
-    // Función para ver el historial de mantenimientos
-    document.getElementById("viewHistoryBtn").addEventListener("click", () => {
-        if (maintenanceStats.history.length === 0) {
-            alert("No hay historial de mantenimientos.");
-            return;
-        }
-
-        let historyOutput = "Historial de Mantenimientos:\n";
-        maintenanceStats.history.forEach((entry, index) => {
-            historyOutput += `${index + 1}. Tipo: ${entry.tipo}, Fecha: ${entry.fecha.toLocaleDateString()}, Descripción: ${entry.descripcion}\n`;
-        });
-        alert(historyOutput);
-    });
-
-
-    // codigo de equipo.html
-
-    document.getElementById("submitEquipmentBtn").onclick = function() {
-        // Obtener datos del formulario
-        const equipo = {
-            foto: document.getElementById("equipmentPhoto").files[0],
-            nombre: document.getElementById("equipmentName").value,
-            area: document.getElementById("equipmentArea").value,
-            tipo: document.getElementById("equipmentType").value,
-            subtipo: document.getElementById("equipmentSubtype").value,
-            marca: document.getElementById("equipmentBrand").value,
-            serial: document.getElementById("equipmentSerial").value,
-            modelo: document.getElementById("equipmentModel").value,
-            manual: document.getElementById("equipmentManual").value,
-            garantia: document.getElementById("equipmentWarranty").value
-        };
-
-        // Obtener equipos existentes y agregar el nuevo
-        const equipos = JSON.parse(localStorage.getItem('equipos')) || [];
-        equipos.push(equipo);
-        localStorage.setItem('equipos', JSON.stringify(equipos));
-
-        // Guardar el nuevo arreglo en localStorage
-        localStorage.setItem('equipos', JSON.stringify(equipos));
-
-        // Cerrar el modal
-        document.getElementById("closeEquipmentModal").click();
+    // Función para mostrar la imagen en el modal ampliado
+    window.showImage = function(imgElement) {
+        openImageModal(imgElement.src);
     };
-    function mostrarEquipos(pagina) {
-        const equipos = obtenerEquipos();
-        const inicio = (pagina - 1) * itemsPorPagina;
-        const fin = inicio + itemsPorPagina;
-        const equiposPagina = equipos.slice(inicio, fin);
-
-        const lista = document.getElementById("equipmentList");
-        lista.innerHTML = ""; // Limpiar lista existente
-
-        equiposPagina.forEach((equipo, index) => {
-            const item = document.createElement("li");
-            item.className = "equipment-item";
-            item.innerHTML = `
-                <strong>Nombre:</strong> ${equipo.nombre} <br>
-                <strong>Área:</strong> ${equipo.area} <br>
-                <strong>Tipo:</strong> ${equipo.tipo} <br>
-                <strong>Subtipo:</strong> ${equipo.subtipo} <br>
-            `;
-            item.onclick = function() {
-                mostrarDetallesEquipo(index + inicio); // Pasar el índice correcto
-            };
-            lista.appendChild(item);
-        });
-
-        mostrarPaginacion(equipos.length);
-    }
-
-    //cerrar modal de detalles de equipos
-    function closeDetailsModal() {
-        document.getElementById("equipmentDetailsModal").style.display = "none";
-    }
-    
-
-    document.getElementById("submitEquipmentBtn").onclick = function() {
-        const equipo = {
-            foto: document.getElementById("equipmentPhoto").files[0],
-            nombre: document.getElementById("equipmentName").value,
-            area: document.getElementById("equipmentArea").value,
-            tipo: document.getElementById("equipmentType").value,
-            subtipo: document.getElementById("equipmentSubtype").value,
-            marca: document.getElementById("equipmentBrand").value,
-            serial: document.getElementById("equipmentSerial").value,
-            modelo: document.getElementById("equipmentModel").value,
-            manual: document.getElementById("equipmentManual").value,
-            garantia: document.getElementById("equipmentWarranty").value
-        };
-    
-        const equipos = JSON.parse(localStorage.getItem('equipos')) || [];
-        equipos.push(equipo);
-        localStorage.setItem('equipos', JSON.stringify(equipos));
-        document.getElementById("closeEquipmentModal").click();
-    };
-
-
-
-
 });
-
-
 
 // Función para llenar los selectores de área, tipo y subtipo
 const fillSelectOptions = () => {

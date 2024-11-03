@@ -20,20 +20,20 @@
                     <li><a href="index.html"class="nav-button">Inicio</a></li>
                     <li><a href="opciones.html"Class="nav-button">Etiquetas</a></li>
                     <li><a href="inventario.html"class="nav-button">Inventario de Repuestos</a></li>
-                <!--    <li><a href="equipos.html">Equipos</a></li> -->
-                <!--    <li><a href="#calendario">Calendario de Mantenimiento</a></li>  -->
-                <!--    <li><a href="#reportes">Reportes</a></li> -->
+                    <li><a href="calendario.html"class="nav-button">calendario</a></li>
                 </ul>
             </ul>
         </nav>
     </header>
 
     <main>
+    <!--   busqueda -->   
+    <section id="addOptions">
+        <h2>Repuestos</h2>
+        <label for="searchInput">Buscar Opción:</label>
+        <input type="text" id="searchInput" placeholder="Buscar por nombre">
 
-
-
-
-      <!--   <button id="addEquipmentBtn">Agregar Equipo</button> -->
+      <!--   inventario -->
         <section id="inventario">
             <h2>Inventario de Repuestos</h2>
             <button id="addPartBtn">Agregar Repuesto</button>
@@ -52,130 +52,25 @@
             
                 </tbody>
             </table>
-        </section>
-
-        <section id="reportes">
-            <h2>Reportes</h2>
-            <button id="generateReportBtn">Generar Reporte</button>
-            <div id="reportOutput"></div>
-        </section>
-
-        <section id="panelControl">
-            <h2>Panel de Control</h2>
-            <div id="maintenanceStats">
-                <h3>Estadísticas de Mantenimiento</h3>
-                <p id="upcomingMaintenanceCount">Mantenimientos Próximos: <span>0</span></p>
-                <p id="overdueMaintenanceCount">Mantenimientos Retrasados: <span>0</span></p>
+            
+            <div class="pagination">
+                <button id="prevPageBtn" class="prev" disabled>Anterior</button>
+                <div id="pageNumbers"></div>
+                <button id="nextPageBtn" class="next" disabled>Siguiente</button>
             </div>
-            <button id="viewHistoryBtn">Ver Historial de Mantenimientos</button>
+            <p id="pageInfo"></p>
+        
         </section>
-    </main>
 
-    <footer>
-        <p>© 2024 Jacinto Convit Foundation. Todos los derechos reservados.</p>
-    </footer>
-
-    <!-- Modal para agregar equipo -->
-    <div id="addEquipmentModal" class="modal">
-        <div class="modal-content">
-            <span class="close" id="closeEquipmentModal">&times;</span>
-            <h2>Agregar Equipo</h2>
-
-            <!-- Foto y Nombre -->
-            <label for="equipmentPhoto">Foto (Cargar archivo):</label>
-            <input type="file" id="equipmentPhoto" accept="image/*">
-            
-            <label for="equipmentName">Nombre del Equipo:</label>
-            <input type="text" id="equipmentName" placeholder="Nombre del equipo" required>
-
-            <!-- Clasificación -->
-            <label for="equipmentArea">Área del Equipo:</label>
-            <select id="equipmentArea">
-                <option value="producción">Producción</option>
-                <option value="mantenimiento">Mantenimiento</option>
-                <option value="calidad">Calidad</option>
-            </select>
-
-            <label for="equipmentType">Tipo:</label>
-            <select id="equipmentType">
-                <option value="máquina">Máquina</option>
-                <option value="herramienta">Herramienta</option>
-                <option value="insumo">Insumo</option>
-
-            </select>
-
-            <label for="equipmentSubtype">Subtipo:</label>
-            <select id="equipmentSubtype">
-                <option value="electrónico">Electrónico</option>
-                <option value="mecánico">Mecánico</option>
-                <option value="neumático">Neumático</option>
-
-            </select>
-
-
-            
-
-            <!-- Detalles adicionales -->
-            <label for="equipmentBrand">Marca del Equipo:</label>
-            <input type="text" id="equipmentBrand" placeholder="Marca del equipo">
-
-            <label for="equipmentSerial">Serial del Equipo:</label>
-            <input type="text" id="equipmentSerial" placeholder="Serial del equipo">
-
-            <label for="equipmentModel">Modelo del Equipo:</label>
-            <input type="text" id="equipmentModel" placeholder="Modelo del equipo">
-
-            <label for="equipmentManual">Manual del Equipo (URL):</label>
-            <input type="url" id="equipmentManual" placeholder="URL del manual">
-
-            <label for="equipmentWarranty">Fecha de Garantía:</label>
-            <input type="date" id="equipmentWarranty">
-
-            <button id="submitEquipmentBtn">Agregar Equipo</button>
-        </div>
-    </div>
-
-    <!-- Modal para ver detalles del equipo -->
-    <div id="equipmentDetailsModal" class="modal">
-        <div class="modal-content">
-            <span class="close" id="closeEquipmentDetailsModal" onclick="closeDetailsModal()">&times;</span>
-            <h2>Detalles del Equipo</h2>
-            <div id="equipmentDetailsContent"></div>
-        </div>
-    </div>
-
+    
     <!-- Modal para imagen ampliada -->
     <div id="imageModal" style="display:none;">
         <span class="close" id="closeImageModal" style="cursor:pointer;">&times;</span>
         <img id="expandedImage" src="" alt="Imagen ampliada">
     </div>
 
-    <!-- Modal para agregar mantenimiento -->
-    <div id="addMaintenanceModal" class="modal">
-        <div class="modal-content">
-            <span class="close" id="closeMaintenanceModal">&times;</span>
-            <h2>Agregar Mantenimiento</h2>
-            <label for="tipoMantenimiento">Tipo de Mantenimiento:</label>
-            <select id="tipoMantenimiento">
-                <option value="preventivo">Preventivo</option>
-                <option value="correctivo">Correctivo</option>
-            </select>
-            <label for="fechaMantenimiento">Fecha:</label>
-            <input type="date" id="fechaMantenimiento" required>
-            <label for="descripcionMantenimiento">Descripción:</label>
-            <textarea id="descripcionMantenimiento" rows="3" placeholder="Descripción del mantenimiento" required></textarea>
-            <button id="submitMaintenanceBtn">Agregar Mantenimiento</button>
-
-            
-        </div>
-    </div>
-
-
-
-
-
      <!-- Modal para agregar repuesto -->
-    <div id="addPartModal" class="modal">
+     <div id="addPartModal" class="modal">
         <div class="modal-content">
             <span class="close" id="closePartModal">&times;</span>
             <h2>Agregar Repuesto</h2>
@@ -189,7 +84,8 @@
         </div>
     </div>
     
+    <script src="js/inventario.js"></script>
     <script src="js/highlightNav.js" defer></script>
-    <script src="js/scriptCopy.js"></script>
+    
 </body>
 </html>

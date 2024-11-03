@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control Mantenimiento</title>
+    <!-- icono -->
+    <link rel="shortcut icon" href="img/logo.png">
+    <link rel="stylesheet" href="css/styles.css">
+    <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css' rel='stylesheet' />
+    <style>
+        #calendar {
+            max-width: 900px;
+            margin: 40px auto;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <img src="img/logo.png" alt="Logo" id="headerLogo">
+    <div class="header-content">
+        <h1>Control de Mantenimiento</h1>
+    </div>
+    <nav>
+        <ul>
+            <li><a href="index.html"class="nav-button">Inicio</a></li>
+            <li><a href="opciones.html"Class="nav-button">Etiquetas</a></li>
+            <li><a href="inventario.html"class="nav-button">Inventario de Repuestos</a></li>
+            <li><a href="calendario.html"class="nav-button">calendario</a></li>
+        </ul>
+    </nav>
+</header>
+
+
+    <div id="maintenanceModal" class="modal">
+        <div class="modal-content">
+            <span id="closeMaintenanceModal" class="close">&times;</span>
+            <h2>Detalles del Mantenimiento</h2>
+            <p><strong>Equipo:</strong> <span id="equipmentName"></span></p>
+            <p><strong>Tipo:</strong> <span id="maintenanceType"></span></p>
+            <p><strong>Fecha:</strong> <span id="maintenanceDate"></span></p>
+            <p><strong>Descripción:</strong> <span id="maintenanceDescription"></span></p>
+            <button id="deleteMaintenanceBtn">Eliminar Mantenimiento</button>
+        </div>
+    </div>
+
+    <h1>Calendario de Mantenimientos</h1>
+    <div id='calendar'></div>
+
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js'></script>
+    <script src="js/calendario.js"></script>
+    <script src="js/highlightNav.js" defer></script>
+</body>
+</html>

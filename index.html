@@ -19,9 +19,7 @@
                 <li><a href="index.html"class="nav-button">Inicio</a></li>
                 <li><a href="opciones.html"Class="nav-button">Etiquetas</a></li>
                 <li><a href="inventario.html"class="nav-button">Inventario de Repuestos</a></li>
-            <!--    <li><a href="equipos.html">Equipos</a></li> -->
-            <!--    <li><a href="#calendario">Calendario de Mantenimiento</a></li>  -->
-            <!--    <li><a href="#reportes">Reportes</a></li> -->
+                <li><a href="calendario.html"class="nav-button">calendario</a></li>
             </ul>
         </nav>
     </header>
@@ -45,37 +43,8 @@
                 </thead>
                 <tbody>
                     <!-- Los equipos se agregarán aquí -->
-                    
-                    
                 </tbody>
             </table>
-        </section>
-        
-
-        <section id="inventario">
-            <h2>Inventario de Repuestos</h2>
-            <button id="addPartBtn">Agregar Repuesto</button>
-            <table id="partsTable">
-                <thead>
-                    <tr>
-                        <th>Foto</th>
-                        <th>Repuesto</th>
-                        <th>Cantidad</th>
-                        <th>Acciones</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <!-- Los repuestos se agregarán aquí -->
-                     
-            
-                </tbody>
-            </table>
-        </section>
-
-        <section id="reportes">
-            <h2>Reportes</h2>
-            <button id="generateReportBtn">Generar Reporte</button>
-            <div id="reportOutput"></div>
         </section>
 
         <section id="panelControl">
@@ -119,7 +88,6 @@
                 <option value="máquina">Máquina</option>
                 <option value="herramienta">Herramienta</option>
                 <option value="insumo">Insumo</option>
-
             </select>
 
             <label for="equipmentSubtype">Subtipo:</label>
@@ -127,11 +95,7 @@
                 <option value="electrónico">Electrónico</option>
                 <option value="mecánico">Mecánico</option>
                 <option value="neumático">Neumático</option>
-
             </select>
-
-
-            
 
             <!-- Detalles adicionales -->
             <label for="equipmentBrand">Marca del Equipo:</label>
@@ -183,27 +147,9 @@
             <label for="descripcionMantenimiento">Descripción:</label>
             <textarea id="descripcionMantenimiento" rows="3" placeholder="Descripción del mantenimiento" required></textarea>
             <button id="submitMaintenanceBtn">Agregar Mantenimiento</button>
-
-            
         </div>
     </div>
 
-
-     <!-- Modal para agregar repuesto -->
-    <div id="addPartModal" class="modal">
-        <div class="modal-content">
-            <span class="close" id="closePartModal">&times;</span>
-            <h2>Agregar Repuesto</h2>
-            <label for="partPhoto">Foto del Repuesto (Cargar archivo):</label>
-            <input type="file" id="partPhoto" accept="image/*">
-            <label for="partName">Nombre del Repuesto:</label>
-            <input type="text" id="partName" placeholder="Nombre del repuesto" required>
-            <label for="partQuantity">Cantidad:</label>
-            <input type="number" id="partQuantity" placeholder="Cantidad" required>
-            <button id="submitPartBtn">Agregar Repuesto</button>
-        </div>
-    </div>
-    
     <script src="js/highlightNav.js" defer></script>
     <script src="js/script.js"></script>
 </body>
