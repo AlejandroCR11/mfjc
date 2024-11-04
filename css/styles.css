@@ -184,41 +184,41 @@ button {
     
   }
 
+/* inicio */
 
 button:hover {
     background-color: #0b0f2a;
 }
 
 .button-view {
-    background-color: #37873a; /* Verde */
+    background-color: #37873a; 
 }
 
 .button-maintenance {
-    background-color: #223db3; /* Azul */
+    background-color: #223db3; 
 
 
 }
 
 .button-delete {
-    background-color: #b13229; /* Rojo */
-
+    background-color: #b13229;
  
 }
 
 .button-delete-options {
-    background-color: #b13229; /* Rojo */
+    background-color: #b13229; 
     float: right; /* Alinear a la derecha */
 
 }
 
 .button-delete {
-    background-color: #b13229; /* Rojo */
+    background-color: #b13229; 
 
 }
 
 
 .button-delete-part{
-    background-color: #b13229; /* Rojo */
+    background-color: #b13229; 
     
     
 }
@@ -248,6 +248,73 @@ button:hover {
         
 }
 }
+
+
+/*Inventaio telefono */
+@media (max-width: 768px) {
+
+.btn {
+    background-color: #4CAF50; /* Color de fondo verde */
+    border: none; /* Sin borde */
+    color: white; /* Color del texto blanco */
+    padding: 1px 15px; /* Relleno del botón */
+    text-align: center; /* Alinear el texto al centro */
+    text-decoration: none; /* Sin subrayado */
+    display: inline-block; /* Mostrar en línea */
+    font-size: 16px; /* Tamaño de la fuente */
+    margin: 4px 2px; /* Margen alrededor de los botones */
+    cursor: pointer; /* Cambia el cursor al pasar por encima */
+    border-radius: 5px; /* Bordes redondeados */
+    transition: background-color 0.3s, transform 0.2s; /* Transiciones suaves */
+    display: flex; /* Usar flexbox para una mejor alineación */
+}
+
+.increment-btn {
+    background-color: #28a745; /* Verde más oscuro para incrementar */
+}
+
+.decrement-btn {
+    background-color: #dcc035; /* Rojo para decrementar */
+}
+
+.delete-btn {
+    background-color: #dc3545; /* Rojo para eliminar */
+}
+
+.btn:hover {
+    background-color: #45a049; /* Color más oscuro al pasar el ratón */
+}
+
+.increment-btn:hover {
+    background-color: #218838; /* Verde más oscuro al pasar el ratón */
+}
+
+.decrement-btn:hover {
+    background-color: #c8aa23; /* Rojo más oscuro al pasar el ratón */
+}
+
+.delete-btn:hover {
+    background-color: #c82333; /* Rojo más oscuro al pasar el ratón */
+}
+
+.btn:active {
+    transform: scale(0.95); /* Efecto de reducción al hacer clic */
+}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /* Estilos adicionales para modales */
