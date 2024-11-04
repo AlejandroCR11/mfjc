@@ -178,9 +178,9 @@ document.addEventListener("DOMContentLoaded", () => {
             nameCell.innerText = option.name;
             quantityCell.innerHTML = `<span class="part-quantity">${option.quantity}</span>`;
             actionsCell.innerHTML = `
-                <button onclick="incrementQuantity(this)">+</button>
-                <button onclick="decrementQuantity(this)">-</button>
-                <button onclick="deletePart(this)">Eliminar</button>
+                <button class="btn increment-btn" onclick="incrementQuantity(this)">+</button>
+                <button class="btn decrement-btn" onclick="decrementQuantity(this)">-</button>
+                <button class="btn delete-btn" onclick="deletePart(this)">Eliminar</button>
             `;
         });
 

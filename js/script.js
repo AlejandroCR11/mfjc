@@ -24,6 +24,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const equipmentDetailsContent = document.getElementById("equipmentDetailsContent");
     const closeEquipmentDetailsModal = document.getElementById("closeEquipmentDetailsModal");
 
+    const viewHistoryBtn = document.getElementById("viewHistoryBtn");
+
+
     document.getElementById("addEquipmentBtn").addEventListener("click", () => {
         addEquipmentModal.style.display = "block";
     });
@@ -186,7 +189,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     date: fechaMantenimiento,
                     descripcion: descripcionMantenimiento
                 };
-    
+
+            
 
                 // Actualizar estadísticas
                 const today = new Date();
@@ -210,12 +214,29 @@ document.addEventListener("DOMContentLoaded", () => {
             document.getElementById("fechaMantenimiento").value = "";
             document.getElementById("descripcionMantenimiento").value = "";
 
+            updateMaintenanceStats();
             initializeCalendar(); // Recargar el calendario para reflejar el nuevo mantenimiento
         } else {
             alert("Por favor, complete todos los campos obligatorios.");
         }
     };
 };
+
+viewHistoryBtn.addEventListener("click", () => {
+    const historialMantenimientos = JSON.parse(localStorage.getItem("maintenances")) || [];
+
+    if (historialMantenimientos.length === 0) {
+        alert("No hay historial de mantenimientos.");
+        return;
+    }
+
+    let historyOutput = "Historial de Mantenimientos:\n";
+    historialMantenimientos.forEach((entry, index) => {
+        historyOutput += `${index + 1}. Equipo: ${entry.equipo}, Tipo: ${entry.tipo}, Fecha: ${entry.date}, Descripción: ${entry.descripcion}\n`;
+    });
+    alert(historyOutput);
+});
+
 
     // Actualiza las estadísticas de mantenimiento en el panel de control
     function updateMaintenanceStats() {
@@ -276,3 +297,5 @@ const fillSelectOptions = () => {
 
 // Llamar a fillSelectOptions al cargar la página
 document.addEventListener('DOMContentLoaded', fillSelectOptions);
+
+
