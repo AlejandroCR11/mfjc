@@ -251,7 +251,6 @@ button:hover {
 
 
 /*Inventaio telefono */
-@media (max-width: 768px) {
 
 .btn {
     background-color: #4CAF50; /* Color de fondo verde */
@@ -266,7 +265,7 @@ button:hover {
     cursor: pointer; /* Cambia el cursor al pasar por encima */
     border-radius: 5px; /* Bordes redondeados */
     transition: background-color 0.3s, transform 0.2s; /* Transiciones suaves */
-    display: flex; /* Usar flexbox para una mejor alineación */
+   
 }
 
 .increment-btn {
@@ -301,6 +300,10 @@ button:hover {
     transform: scale(0.95); /* Efecto de reducción al hacer clic */
 }
 
+@media (max-width: 768px) {
+    .btn {
+    display: flex; /* Usar flexbox para una mejor alineación */
+    }
 }
 
 
