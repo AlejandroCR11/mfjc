@@ -11,10 +11,6 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentPage = 1;
     const rowsPerPage = 6; // Cambia esto según cuántas filas quieras por página
 
-
-    
-
-
     // Modal y botón de agregar repuesto
     const addPartModal = document.getElementById("addPartModal");
     const submitPartBtn = document.getElementById("submitPartBtn");
@@ -30,7 +26,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const nextPageBtn = document.getElementById("nextPageBtn");
     const pageNumbersContainer = document.getElementById("pageNumbers");
     const pageInfo = document.getElementById("pageInfo");
-
 
     document.getElementById("addPartBtn").addEventListener("click", () => {
         addPartModal.style.display = "block";
@@ -52,8 +47,6 @@ document.addEventListener("DOMContentLoaded", () => {
         imageModal.style.display = "block"; 
     }
     
-
-
         // Función para incrementar la cantidad del repuesto
         window.incrementQuantity = function(button) {
             const quantityCell = button.parentNode.parentNode.cells[2];
@@ -71,16 +64,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 quantitySpan.innerText = --quantity;
             }
         };
-        
-    
 
-                // Función para confirma eliminacion de un repuesto
-    window.deletePart = function(button) {
-        if (confirm("¿Estás seguro de que deseas eliminar este repuesto?")) {
-            const row = button.parentNode.parentNode;
-            const index = Array.from(partsTableBody.rows).indexOf(row); // Obtener el índice de la fila
-            options.splice((currentPage - 1) * rowsPerPage + index, 1); // Eliminar del arreglo options
-            renderTable(); // Volver a renderizar la tabla
+        // Función para confirma eliminacion de un repuesto
+        window.deletePart = function(button) {
+            if (confirm("¿Estás seguro de que deseas eliminar este repuesto?")) {
+                const row = button.parentNode.parentNode;
+                const index = Array.from(partsTableBody.rows).indexOf(row); // Obtener el índice de la fila
+                options.splice((currentPage - 1) * rowsPerPage + index, 1); // Eliminar del arreglo options
+                renderTable(); // Volver a renderizar la tabla
         }
     };
 
@@ -112,40 +103,69 @@ document.addEventListener("DOMContentLoaded", () => {
         closeModal(addPartModal); // Cierra el modal después de agregar el repuesto
     });
 
-    // Abre el modal de imagen ampliada
-    window.showImage = function(image) {
-        expandedImage.src = image.src;
-        openModal(imageModal); // Utiliza la función para desactivar el scroll
-    };
 
-    // Cierra el modal de imagen ampliada
-    closeImageModal.onclick = () => {
-        closeModal(imageModal);
-    };
 
-    // Cerrar los modales al hacer clic fuera de ellos
-    window.onclick = function(event) {
-        if (event.target === addPartModal) {
-            closeModal(addPartModal);
+    // Agregar el nuevo repuesto al hacer clic en el botón "Agregar Repuesto"
+    submitPartBtn.addEventListener("click", () => {
+        const partPhotoInput = document.getElementById("partPhoto");
+        const partNameInput = document.getElementById("partName");
+        const partQuantityInput = document.getElementById("partQuantity");
+
+        // Validar que los campos requeridos no estén vacíos
+        if (partPhotoInput.files.length > 0 && partNameInput.value && partQuantityInput.value) {
+            const newPart = {
+                name: partNameInput.value,
+                quantity: parseInt(partQuantityInput.value, 10),
+                photo: URL.createObjectURL(partPhotoInput.files[0]) // Asigna la foto cargada
+            };
+
+            // Agregar el nuevo repuesto al arreglo
+            options.push(newPart);
+
+            // Limpiar los campos del formulario
+            partPhotoInput.value = '';
+            partNameInput.value = '';
+            partQuantityInput.value = '';
+
+            // Reiniciar a la primera página y renderizar la tabla
+            currentPage = 1;
+            renderTable();
+            
+            // Cerrar el modal
+            addPartModal.style.display = "none";
+        } else {
+            alert("Por favor, complete todos los campos requeridos, incluyendo la foto.");
         }
-        if (event.target === imageModal) {
+    });
+
+        // Abre el modal de imagen ampliada
+        window.showImage = function(image) {
+            expandedImage.src = image.src;
+            openModal(imageModal); // Utiliza la función para desactivar el scroll
+        };
+    
+        // Cierra el modal de imagen ampliada
+        closeImageModal.onclick = () => {
             closeModal(imageModal);
-        }
-    };
-
-
-
-
-
-
+        };
+    
+        // Cerrar los modales al hacer clic fuera de ellos
+        window.onclick = function(event) {
+            if (event.target === addPartModal) {
+                closeModal(addPartModal);
+            }
+            if (event.target === imageModal) {
+                closeModal(imageModal);
+            }
+        };
 
 
     // Función para renderizar la tabla de repuestos
-    function renderTable() {
+    function renderTable(filteredOptions) {
         partsTableBody.innerHTML = ""; // Limpiar la tabla antes de renderizar
         const startIndex = (currentPage - 1) * rowsPerPage;
-        const endIndex = startIndex + rowsPerPage;
-        const paginatedOptions = options.slice(startIndex, endIndex);
+        const optionsToRender = filteredOptions || options; // Usar opciones filtradas si existen
+        const paginatedOptions = optionsToRender.slice(startIndex, startIndex + rowsPerPage);
 
         paginatedOptions.forEach(option => {
             const row = partsTableBody.insertRow();
@@ -206,20 +226,16 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+    // Agregar evento para buscar por nombre
+    searchInput.addEventListener("input", () => {
+        const searchTerm = searchInput.value.toLowerCase();
+        const filteredOptions = options.filter(option => option.name.toLowerCase().includes(searchTerm));
+        currentPage = 1; // Reiniciar a la primera página
+        renderTable(filteredOptions); // Renderizar tabla con opciones filtradas
+    });
+
     // Inicializar la tabla al cargar
     renderTable();
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     // Agregar evento al botón de agregar repuesto
@@ -232,38 +248,6 @@ document.getElementById("closePartModal").addEventListener("click", () => {
     addPartModal.style.display = "none";
 });
 
-// Agregar el nuevo repuesto al hacer clic en el botón "Agregar Repuesto"
-submitPartBtn.addEventListener("click", () => {
-    const partPhotoInput = document.getElementById("partPhoto");
-    const partNameInput = document.getElementById("partName");
-    const partQuantityInput = document.getElementById("partQuantity");
-
-    // Validar que los campos requeridos no estén vacíos
-    if (partPhotoInput.files.length > 0 && partNameInput.value && partQuantityInput.value) {
-        const newPart = {
-            name: partNameInput.value,
-            quantity: parseInt(partQuantityInput.value, 10),
-            photo: URL.createObjectURL(partPhotoInput.files[0]) // Asigna la foto cargada
-        };
-
-        // Agregar el nuevo repuesto al arreglo
-        options.push(newPart);
-
-        // Limpiar los campos del formulario
-        partPhotoInput.value = '';
-        partNameInput.value = '';
-        partQuantityInput.value = '';
-
-        // Reiniciar a la primera página y renderizar la tabla
-        currentPage = 1;
-        renderTable();
-        
-        // Cerrar el modal
-        addPartModal.style.display = "none";
-    } else {
-        alert("Por favor, complete todos los campos requeridos, incluyendo la foto.");
-    }
-});
 
 
 

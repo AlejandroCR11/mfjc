@@ -2,6 +2,8 @@ document.addEventListener('DOMContentLoaded', function() {
     const calendarEl = document.getElementById('calendar');
     let calendar; // Declarar la variable calendar
 
+    
+
     // Cargar mantenimientos desde el localStorage
     const loadMaintenances = () => {
         return JSON.parse(localStorage.getItem('maintenances')) || [];
