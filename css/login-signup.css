@@ -287,7 +287,7 @@ h5 {
     /* Ajustar tamaño de los campos de texto */
     #loginForm input[type="text"],
     #loginForm input[type="password"] {
-        width: 100%; /* Mantiene el ancho del contenedor */
+        width: 90%; /* Mantiene el ancho del contenedor */
         font-size: 0.9rem; /* Tamaño de fuente más pequeño */
         padding: 0.6rem; /* Reducir padding para hacer el campo más compacto */
         border-radius: 6px; /* Bordes redondeados ligeramente */
