@@ -296,7 +296,7 @@ h5 {
 
     /* Estilo para el botón de "Iniciar sesión" */
     #loginForm button {
-        width: 80%; /* Ancho completo */
+        width: 60%; /* Ancho completo */
         font-size: 1rem; /* Tamaño de fuente reducido */
         padding: 0.8rem; /* Padding más pequeño */
         border-radius: 8px; /* Bordes ligeramente redondeados */
