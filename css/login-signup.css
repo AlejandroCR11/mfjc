@@ -279,3 +279,33 @@ h5 {
         font-size: 0.8rem; /* Ajusta el tamaño del enlace */
     }
 }
+
+
+
+/* Estilo específico para dispositivos móviles (pantallas de hasta 768px) */
+@media (max-width: 768px) {
+    /* Ajustar tamaño de los campos de texto */
+    #loginForm input[type="text"],
+    #loginForm input[type="password"] {
+        width: 100%; /* Mantiene el ancho del contenedor */
+        font-size: 0.9rem; /* Tamaño de fuente más pequeño */
+        padding: 0.6rem; /* Reducir padding para hacer el campo más compacto */
+        border-radius: 6px; /* Bordes redondeados ligeramente */
+        margin-bottom: 1rem; /* Espaciado entre campos */
+    }
+
+    /* Estilo para el botón de "Iniciar sesión" */
+    #loginForm button {
+        width: 100%; /* Ancho completo */
+        font-size: 1rem; /* Tamaño de fuente reducido */
+        padding: 0.8rem; /* Padding más pequeño */
+        border-radius: 8px; /* Bordes ligeramente redondeados */
+        background-color: #007BFF; /* Color del botón */
+        color: #ffffff; /* Color del texto */
+    }
+
+    /* Efecto hover para el botón en dispositivos móviles */
+    #loginForm button:hover {
+        background-color: #0056b3; /* Color más oscuro en hover */
+    }
+}
