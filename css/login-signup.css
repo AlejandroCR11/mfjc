@@ -1,0 +1,281 @@
+/* Estilos generales */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f1f1f1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Contenedor principal */
+.container {
+    width: 100%;
+    max-width: 420px;
+    background-color: #ffffff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: all 0.3s ease-in-out;
+}
+
+
+/* Encabezado */
+.header-container {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.header-container img {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 1rem;
+    transition: transform 0.3s ease-in-out;
+}
+
+.header-container img:hover {
+    transform: scale(1.1);
+}
+
+.header-container h2 {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: #333;
+}
+
+/* Títulos de los formularios */
+h1 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+}
+
+/* Inputs del formulario */
+input {
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease-in-out;
+}
+
+input:focus {
+    border-color: #007BFF;
+    outline: none;
+}
+
+/* Botón de envío */
+button {
+    width: 100%;
+    padding: 1rem;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    font-weight: bold;
+    transition: background-color 0.3s ease-in-out;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Mensajes de error */
+.error-message {
+    color: #FF4747;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+
+/* Enlaces */
+a {
+    display: block;
+    margin-top: 1rem;
+    color: #007BFF;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Controles de recordar contraseña */
+.remember-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.remember-container input[type="checkbox"] {
+    margin-right: 0.5rem;
+    margin-top: 1rem;
+    margin-left: 14rem; /* Ajusta el espacio entre el checkbox y el texto */
+}
+
+/* Cambiar entre formularios */
+.switch-form {
+    margin-top: 1.5rem;
+    font-size: 1rem;
+    color: #007BFF;
+    cursor: pointer;
+    transition: color 0.3s ease-in-out;
+}
+
+.switch-form:hover {
+    color: #0056b3;
+}
+
+/* Formulario de login y registro ocultos */
+#registerFormContainer {
+    display: none;
+}
+
+/* Animación para mostrar el contenedor */
+#loginFormContainer, #registerFormContainer {
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+}
+
+#loginFormContainer.show, #registerFormContainer.show {
+    opacity: 1;
+}
+
+/* Estilo de pie de página */
+h5 {
+    font-size: 0.9rem;
+    color: #333;
+    margin-top: 2rem;
+    font-weight: normal;
+}
+.remember-container label {
+    white-space: nowrap; /* Evita que el texto se divida en varias líneas */
+}
+
+
+
+.error-message {
+    display: none; /* Oculta el mensaje inicialmente */
+    color: #FF4747;
+    background-color: #ffe5e5;
+    margin-top: 1px;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    border-radius: 6px;
+    padding: 10px;
+    max-width: 80%;
+    text-align: center;
+    position: relative;
+    top: -10px;
+    margin: 0 auto;
+}
+#loginErrorMessage, #registerErrorMessage {
+    max-width: 80%;
+    text-align: center;
+}
+
+
+@keyframes slideUp {
+    0% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+}
+
+/* Aplicar animación de salida al ocultar el formulario de registro */
+#loginFormContainer {
+    display: none;
+    animation: slideDown 0.5s ease forwards; /* Aplica la animación de deslizamiento */
+}
+#loginFormContainer.show {
+    display: block; /* Muestra el formulario */
+}
+
+
+@keyframes slideDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Aplica la animación al formulario de registro cuando se muestra */
+#registerFormContainer {
+    display: none;
+    animation: slideDown 0.5s ease forwards; /* Aplica la animación de deslizamiento */
+}
+
+#registerFormContainer.show {
+    display: block; /* Muestra el formulario */
+}
+
+
+
+
+
+
+
+/* Estilos específicos para teléfono de Recuperar Contraseña */
+@media (max-width: 768px) {
+    body {
+        background-color: #f1f1f1; /* Mantiene el fondo coherente */
+        padding: 1rem; /* Añade un poco de espacio alrededor */
+    }
+
+    .reset-container {
+        width: 100%; /* Hace que el contenedor ocupe el 100% del ancho */
+        max-width: none; /* Elimina el límite de ancho máximo */
+        padding: 1.5rem; /* Ajusta el padding para más comodidad */
+        border-radius: 8px; /* Reduce el radio de los bordes para un look más compacto */
+    }
+
+    .reset-container h1 {
+        font-size: 1.5rem; /* Reduce el tamaño del título */
+        margin-bottom: 1rem; /* Espacio reducido debajo del título */
+    }
+
+    .reset-container p {
+        font-size: 0.9rem; /* Ajusta el tamaño del texto */
+        margin-bottom: 1rem; /* Espacio reducido debajo del párrafo */
+    }
+
+    .reset-container input {
+        font-size: 0.9rem; /* Ajusta el tamaño del input */
+        padding: 0.8rem; /* Reduce el padding para un mejor ajuste */
+    }
+
+    .reset-container button {
+        font-size: 1rem; /* Ajusta el tamaño del botón */
+        padding: 0.8rem; /* Reduce el padding del botón */
+    }
+
+    .reset-container a {
+        font-size: 0.8rem; /* Ajusta el tamaño del enlace */
+    }
+}

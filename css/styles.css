@@ -432,7 +432,7 @@ nav ul li a:hover {
     background-color: #29b948; /* Color de fondo al pasar el ratón */
     color: #ffffff;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Sombra al pasar el mouse */
-    transition: background-color 0.1s ease, transform 1s ease; /* Cambia la duración a 0.1s */
+    transition: background-color 0.3s ease, transform 2s ease; /* Cambia la duración a 0.1s */
     transform: translateY(-2px); /* Levanta ligeramente el enlace */
 }
 
@@ -498,6 +498,28 @@ nav ul li a.active {
         width: 100%; /* Botones ocupan el ancho completo en móviles */
     }
 }
+
+
+
+/* Estilo específico para el botón de Cerrar sesión */
+.logout-button {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); /* Sombra al pasar el mouse */
+    transform: translateY(-2px); /* Levanta ligeramente el enlace */
+    background-color: #d74040; /* Color de fondo rojo para destacar */
+    color: white; /* Texto en blanco */
+    padding: 5px 10px; /* Espaciado interno */
+    border-radius: 15px;  /* Bordes redondeados */
+    text-decoration: none; /* Sin subrayado */
+    font-weight: bold; /* Texto en negrita */
+    transition: background-color 0.3s ease; /* Transición suave para el efecto hover */
+}
+
+/* Efecto al pasar el ratón */
+.logout-button:hover {
+    background-color: #aa2727; /* Un rojo más oscuro al pasar el ratón */
+}
+
+
 
 
 /* Estilo específico para el modal de agregar equipo */
@@ -950,6 +972,7 @@ label[for="optionValue"] {
 
 
 
+
 /* CSS para la tabla */ 
 table {
     width: 100%; /* Asegura que la tabla ocupe el ancho completo */
@@ -1138,3 +1161,4 @@ th:nth-child(2), td:nth-child(2) {
 .show {
     display: block; /* Mostrar el modal */
 }
+

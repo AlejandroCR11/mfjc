@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Mantenimiento</title>
+    <!-- icono -->
+    <link rel="shortcut icon" href="img/logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/login-signup.css">
+    <style>
+        /* CSS para animación de bienvenida */
+        #welcomeAnimation {
+            opacity: 1;
+            transition: opacity 0.5s ease;
+        }
+        
+        /* CSS para transición de formularios */
+        .form-container {
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        .form-container.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header-container">
+            <img src="img/logo.png" alt="Logo">
+            <h2>Sistema de control de mantenimiento</h2>
+        </div>
+        
+      
+        <!-- Formulario de inicio de sesión -->
+        <div id="loginFormContainer" class="form-container show">
+            <h1>Iniciar Sesión</h1>
+            <form id="loginForm">
+                <input type="text" id="username" placeholder="Usuario o Correo" required>
+                <input type="password" id="password" placeholder="Contraseña" required>
+                <div class="remember-container">
+                    <input type="checkbox" id="rememberMe">
+                    <label for="rememberMe">Recordar sesión</label>
+                </div>
+
+                  <!-- Mensajes de error generales -->
+                  <div id="loginErrorMessage" class="error-message"></div>
+                  <div id="registerErrorMessage" class="error-message"></div>
+
+                <button type="submit">Iniciar Sesión</button>
+            </form>
+            <a href="reset-container.html">¿Olvidaste tu contraseña?</a>
+            <p class="switch-form" onclick="toggleForm('register')">¿No tienes cuenta? Regístrate aquí</p>
+        </div>
+        
+
+        <!-- Formulario de registro -->
+        <div id="registerFormContainer" class="form-container">
+            <h1>Registrarse</h1>
+            <form id="registerForm">
+                <input type="text" id="registerUsername" placeholder="Nombre de Usuario" required>
+                <input type="email" id="registerEmail" placeholder="Correo Electrónico" required>
+                <input type="password" id="registerPassword" placeholder="Contraseña" required>
+                <input type="password" id="registerConfirmPassword" placeholder="Confirmar Contraseña" required>
+                <button type="submit">Registrarse</button>
+            </form>
+            <p class="switch-form" onclick="toggleForm('login')">¿Ya tienes cuenta? Inicia sesión aquí</p>
+        </div>
+        
+        <h5>Desarrollado por Alejandro Campo</h5>
+    </div>
+
+    <script src="js/login-signup.js"></script>
+</body>
+</html>
