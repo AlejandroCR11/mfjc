@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const addEquipmentModal = document.getElementById("addEquipmentModal");
     const submitEquipmentBtn = document.getElementById("submitEquipmentBtn");
     const closeEquipmentModal = document.getElementById("closeEquipmentModal");
+    const otraOperacion = document.getElementById("otraOperacionInput");
 
     const addMaintenanceModal = document.getElementById("addMaintenanceModal");
     const closeMaintenanceModal = document.getElementById("closeMaintenanceModal");
@@ -62,6 +63,8 @@ document.addEventListener("DOMContentLoaded", () => {
         const equipmentModel = document.getElementById("equipmentModel").value;
         const equipmentManual = document.getElementById("equipmentManual").value || "No tiene manual";
         const equipmentWarrantyDate = document.getElementById("equipmentWarranty").value;
+
+        
 
         // Calcular días de garantía
         let equipmentWarrantyDays;
@@ -163,6 +166,11 @@ document.addEventListener("DOMContentLoaded", () => {
         equipmentDetailsModal.style.display = "none";
     };
 
+
+
+
+    
+
     window.showMaintenanceForm = function(button) {
         const row = button.closest("tr"); // Obtener la fila del equipo
         const equipmentName = row.cells[1].innerText; // Obtener el nombre del equipo desde la segunda celda (ajusta si es necesario)
@@ -178,14 +186,25 @@ document.addEventListener("DOMContentLoaded", () => {
     
         // Asignar la funcionalidad de agregar mantenimiento al botón del modal
         submitMaintenanceBtn.onclick = function() {
+            
+            const tipoOperacion = document.getElementById("tipoOperacion").value;
+            let operacion;
+
+            if (tipoOperacion === "otro") {
+                operacion = document.getElementById("otraOperacionInput").value; // Captura el valor del campo de texto
+            } else {
+                operacion = tipoOperacion;
+            }
+
             const tipoMantenimiento = document.getElementById("tipoMantenimiento").value;
             const fechaMantenimiento = document.getElementById("fechaMantenimiento").value;
             const descripcionMantenimiento = document.getElementById("descripcionMantenimiento").value;
-    
+            
             if (tipoMantenimiento && fechaMantenimiento && descripcionMantenimiento) {
                 const nuevoMantenimiento = {
                     equipo: equipmentName, // Incluye el nombre del equipo
                     tipo: tipoMantenimiento,
+                    operacion: operacion,
                     date: fechaMantenimiento,
                     descripcion: descripcionMantenimiento
                 };
@@ -206,11 +225,15 @@ document.addEventListener("DOMContentLoaded", () => {
             const existingMaintenances = JSON.parse(localStorage.getItem('maintenances')) || [];
             existingMaintenances.push(nuevoMantenimiento);
             localStorage.setItem('maintenances', JSON.stringify(existingMaintenances));
-
-            alert(`Mantenimiento agregado para el equipo "${equipmentName}":\nTipo: ${tipoMantenimiento}\nFecha: ${fechaMantenimiento}\nDescripción: ${descripcionMantenimiento}`);
+            
+            alert(`Mantenimiento agregado para el equipo "${equipmentName}":\nTipo: ${tipoMantenimiento}\nOperación: ${operacion}\nFecha: ${fechaMantenimiento}\nDescripción: ${descripcionMantenimiento}`);
             addMaintenanceModal.style.display = "none";
 
-            document.getElementById("tipoMantenimiento").value = "";
+            // Limpiar campos   
+        // document.getElementById("tipoMantenimiento").value = "";
+        // document.getElementById("tipoOperacion").value = "";
+        document.getElementById("otraOperacionInput").value = "";
+        
             document.getElementById("fechaMantenimiento").value = "";
             document.getElementById("descripcionMantenimiento").value = "";
 
@@ -232,9 +255,9 @@ viewHistoryBtn.addEventListener("click", () => {
 
     let historyOutput = "Historial de Mantenimientos:\n";
     historialMantenimientos.forEach((entry, index) => {
-        historyOutput += `${index + 1}. Equipo: ${entry.equipo}, Tipo: ${entry.tipo}, Fecha: ${entry.date}, Descripción: ${entry.descripcion}\n`;
+        historyOutput += `${index + 1}. Equipo: ${entry.equipo}, Operación: ${entry.tipo}, Fecha: ${entry.date}, Descripción: ${entry.descripcion}\n`;
     });
-    alert(historyOutput);
+    alert(historyOutput);;
 });
 
 
@@ -299,3 +322,15 @@ const fillSelectOptions = () => {
 document.addEventListener('DOMContentLoaded', fillSelectOptions);
 
 
+// Esta función muestra el campo de texto si se selecciona "Otro" en el selector
+function mostrarCampoTexto() {
+    const tipoOperacion = document.getElementById("tipoOperacion").value;
+    const otraOperacionInput = document.getElementById("otraOperacionInput");
+
+    if (tipoOperacion === "otro") {
+        otraOperacionInput.style.display = "block"; // Mostrar campo de texto
+    } else {
+        otraOperacionInput.style.display = "none"; // Ocultar campo de texto
+        otraOperacionInput.value = ""; // Limpiar el campo de texto si no es "Otro"
+    }
+}

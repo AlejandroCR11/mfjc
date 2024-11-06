@@ -308,4 +308,20 @@ h5 {
     #loginForm button:hover {
         background-color: #0056b3; /* Color más oscuro en hover */
     }
+    
+
+
+    .remember-container {
+        display: flex;
+        align-items: center; /* Alinea verticalmente el checkbox y el texto */
+    }
+    
+    .remember-container input[type="checkbox"] {
+        margin-right: 0.1rem; /* Espacio entre el checkbox y el texto */
+    }
+    
+    .remember-container label {
+        font-size: 0.8rem; /* Ajusta el tamaño del texto si es necesario */
+        color: #333; /* Cambia el color si deseas */
+    }
 }

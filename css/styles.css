@@ -1100,21 +1100,37 @@ th:nth-child(2), td:nth-child(2) {
 }
 
 
+#calendar {
+    max-width: 900px;
+    margin: 2.1px;
+    margin-bottom: 100px;
+    margin-left: 450px;
+}
+#calendar .day-cell {
+    width: 40px; /* Ajusta el tamaño de las celdas de día */
+    height: 40px; /* Ajusta la altura de las celdas de día */
+}
+
+
 @media (max-width: 768px) {
     #calendar {
         max-width: 95%; /* Mantener el calendario en el 100% en pantallas pequeñas */
-        
-    }
-
-    .fc-daygrid-day {
-        height: 80px; /* Ajustar la altura de las celdas en pantallas pequeñas */
-        background-color: #e0f7fa; /* Color uniforme para las celdas en modo teléfono */
+        margin: 0.1px;
+        margin-bottom: 100px;
+        margin-left: 10px;
 
     }
-
-    .fc-daygrid-day:hover {
-        background-color: #b2ebf2; /* Color de fondo al pasar el mouse en pantallas pequeñas */
+    /* Opcional: Ajusta el tamaño de las celdas si el calendario usa una cuadrícula */
+    #calendar .day-cell {
+        width: 40px; /* Ajusta el tamaño de las celdas de día */
+        height: 40px; /* Ajusta la altura de las celdas de día */
     }
+
+    /* Ajusta la fuente en encabezados del calendario */
+    #calendar .header {
+        font-size: 1.2rem; /* Reduce el tamaño de la fuente en el encabezado */
+    }
+
 }
 
 /* Mejorar la legibilidad del texto */

@@ -15,15 +15,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const initializeCalendar = () => {
         const maintenances = loadMaintenances().map((m, index) => ({
             id: String(index),
-            title: `${m.equipo} - ${m.tipo}`,
+            title: `${m.equipo} - ${m.tipo} - ${m.operacion}`,  // Mostrar la operación en el título
             start: m.date,
             extendedProps: {
                 tipo: m.tipo,
                 descripcion: m.descripcion,
-                equipo: m.equipo
+                equipo: m.equipo,
+                operacion: m.operacion  // Incluir operacion en las propiedades extendidas
             }
         }));
-
+    
         calendar = new FullCalendar.Calendar(calendarEl, {
             initialView: 'dayGridMonth',
             events: maintenances,
@@ -38,11 +39,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     equipo: info.event.extendedProps.equipo,
                     tipo: info.event.extendedProps.tipo,
                     fecha: new Date(info.event.start),
-                    descripcion: info.event.extendedProps.descripcion
+                    descripcion: info.event.extendedProps.descripcion,
+                    operacion: info.event.extendedProps.operacion  // Mostrar la operación
                 });
             }
         });
-
+    
         calendar.render();
     };
 
@@ -55,6 +57,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById("maintenanceType").innerText = maintenance.tipo || 'No definido';
         document.getElementById("maintenanceDate").innerText = maintenance.fecha.toLocaleDateString() || 'No definido';
         document.getElementById("maintenanceDescription").innerText = maintenance.descripcion || 'No definido';
+        document.getElementById("maintenanceOperation").innerText = maintenance.operacion || 'No definido';  // Nueva línea para mostrar la operación
     
         document.getElementById("maintenanceModal").style.display = "block";
     };

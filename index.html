@@ -26,10 +26,6 @@
     </header>
 
     <main>
-        <section id="calendario">
-            <h2>Calendario de Mantenimiento</h2>
-            <div id="calendar"></div>
-        </section>
 
         <section id="equipos">
             <h2>Lista de Equipos</h2>
@@ -139,10 +135,17 @@
             <span class="close" id="closeMaintenanceModal">&times;</span>
             <h2>Agregar Mantenimiento</h2>
             <label for="tipoMantenimiento">Tipo de Mantenimiento:</label>
-            <select id="tipoMantenimiento">
-                <option value="preventivo">Preventivo</option>
-                <option value="correctivo">Correctivo</option>
-            </select>
+                <select id="tipoMantenimiento">
+                    <option value="preventivo">Preventivo</option>
+                    <option value="correctivo">Correctivo</option>
+                </select>
+                <label for="tipoOperacion">Operación:</label>
+                <select id="tipoOperacion" onchange="mostrarCampoTexto()">
+                    <option value="calibrar">Calibrar</option>
+                    <option value="verificar">Verificar</option>
+                    <option value="otro">Otro</option>
+                </select>
+                <input id="otraOperacionInput" type="text" style="display: none;" placeholder="Escribe la operación">
             <label for="fechaMantenimiento">Fecha:</label>
             <input type="date" id="fechaMantenimiento" required>
             <label for="descripcionMantenimiento">Descripción:</label>
