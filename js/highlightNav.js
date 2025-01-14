@@ -5,6 +5,9 @@ document.addEventListener("DOMContentLoaded", function () {
   
     // Selecciona los botones con la clase 'nav-button'
     const navButtons = document.querySelectorAll(".nav-button");
+
+
+
   
     navButtons.forEach((button) => {
       const buttonPage = new URL(button.href).pathname;
@@ -13,3 +16,4 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   });
+

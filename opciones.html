@@ -20,29 +20,30 @@
             <ul>
                 <li><a href="index.html"class="nav-button">Inicio</a></li>
                 <li><a href="opciones.html"Class="nav-button">Etiquetas</a></li>
-                <li><a href="inventario.html"class="nav-button">Inventario de Repuestos</a></li>
-                <li><a href="calendario.html"class="nav-button">calendario</a></li>
-                <li><a href="login-signup.html" class="nav-button logout-button">Cerrar sesión</a></li>
+                <li><a href="inventario.html"class="nav-button">Stock</a></li>
+                <li><a href="calendario.html"class="nav-button">Calendario</a></li>
+                <li><a href="usuarios.html"class="nav-button">Usuarios</a></li>
+                <li><a href="login.html" class="nav-button logout-button">Cerrar sesión</a></li>
             </ul>
         </nav>
     </header>
 
     <main>
         <section id="addOptions">
-            <h2>Agregar Nueva Opción</h2>
-            <label for="searchInput">Buscar Opción:</label>
+            <h2>Crear nueva Etiqueta</h2>
+            <label for="searchInput"></label>
             <input type="text" id="searchInput" placeholder="Buscar por nombre">
             <h2> </h2>
-            <label for="optionType">Tipo de Opción:</label>
+            <label for="optionType">Tipo de Etiqueta:</label>
             <select id="optionType">
                 <option value="Área">Área</option>
                 <option value="Tipo">Tipo</option>
                 <option value="Subtipo">Subtipo</option>
             </select>
 
-            <label for="optionValue">Nombre de Opción:</label>
-            <input type="text" id="optionValue" placeholder="Nombre de opción" required>
-            <button id="addOptionBtn">Agregar Opción</button>
+            <label for="optionValue">Nombre de Etiqueta:</label>
+            <input type="text" id="optionValue" placeholder="Nombre de Etiqueta" required>
+            <button id="addOptionBtn">Agregar Etiqueta</button>
         </section>
 
         <section id="optionsList">

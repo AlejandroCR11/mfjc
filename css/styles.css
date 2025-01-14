@@ -1104,7 +1104,8 @@ th:nth-child(2), td:nth-child(2) {
     max-width: 900px;
     margin: 2.1px;
     margin-bottom: 100px;
-    margin-left: 450px;
+    margin-left: 200px;
+    scale: 90%;
 }
 #calendar .day-cell {
     width: 40px; /* Ajusta el tamaño de las celdas de día */
@@ -1176,5 +1177,285 @@ th:nth-child(2), td:nth-child(2) {
 /* Mostrar el modal y el fondo oscuro cuando se active */
 .show {
     display: block; /* Mostrar el modal */
+}
+
+
+
+
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+
+h1 {
+    margin-bottom: 20px;
+    font-size: 1.8em;
+    color: #333;
+}
+
+/* Botón de agregar usuario */
+#addUserBtn {
+    padding: 10px 20px;
+    font-size: 1em;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: background-color 0.3s;
+}
+
+#addUserBtn:hover {
+    background-color: #0056b3;
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.modal-content h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.modal-content label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 0.9em;
+    color: #666;
+}
+
+.modal-content input,
+.modal-content select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.modal-content button {
+    padding: 10px;
+    width: 100%;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.modal-content button:hover {
+    background-color: #218838;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.2em;
+    cursor: pointer;
+    color: #aaa;
+}
+
+.close:hover {
+    color: #333;
+}
+
+
+/* Barra de búsqueda */
+#searchInput {
+    padding: 10px;
+    width: 100%;
+    max-width: 400px; /* Puedes ajustar el ancho máximo */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 20px; /* Espacio debajo del campo */
+    display: block; /* Asegura que el campo ocupe una línea completa */
+    margin-left: auto; /* Centra el campo en el contenedor */
+    margin-right: auto; /* Centra el campo en el contenedor */
+}
+/* Lista de usuarios */
+#userList {
+    list-style: none;
+    width: 100%;
+    max-width: 500px;
+}
+
+#userList li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    padding: 15px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#userList li span {
+    font-size: 1em;
+    color: #333;
+}
+
+/* Botones de acciones de usuario (estados Activo/Inactivo) */
+#userList button.toggle-btn {
+    padding: 5px 10px;
+    font-size: 0.9em;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    color: #fff;
+    margin-left: 5px;
+    transition: background-color 0.3s;
+    scale: 90%;
+}
+
+#userList button.toggle-btn.active {
+    background-color: #28a745; /* Verde para Activo */
+}
+
+#userList button.toggle-btn.inactive {
+    background-color: #dc3545; /* Rojo para Inactivo */
+}
+
+/* Texto de estado Activo/Inactivo */
+#userList span.status-active {
+    color: #28a745;
+    font-weight: bold;
+}
+
+#userList span.status-inactive {
+    color: #dc3545;
+    font-weight: bold;
+}
+
+/* Paginación */
+#pagination {
+    display: flex;
+    gap: 5px;
+    margin-top: 15px;
+}
+
+#pagination button {
+    padding: 8px 12px;
+    font-size: 1em;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+}
+
+#pagination button:hover {
+    background-color: #0056b3;
+}
+
+#pagination button.active {
+    background-color: #0056b3;
+}
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Botón de agregar usuario centrado */
+#addUserBtn {
+    display: block;
+    margin: 0 auto 20px; /* Centra el botón y da espacio inferior */
+
+}
+
+/* Barra de búsqueda centrada */
+#searchInput {
+    margin: 0 auto 20px;
+    text-align: center;
+}
+
+
+/* Contenedor principal para centrar todo */
+.main-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Botón de agregar usuario centrado */
+#addUserBtn {
+    display: block;
+    margin: 0 auto 20px; /* Centrado horizontal y espacio inferior */
+}
+
+/* Barra de búsqueda centrada */
+#searchInput {
+    margin: 0 auto 20px;
+    text-align: center;
+}
+
+
+#pagination {
+    display: flex;
+    gap: 5px;
+    margin-top: 15px;
+    justify-content: center;
+}
+
+
+
+/* Lista de usuarios centrada */
+#userList {
+    list-style: none;
+    width: 100%;
+    max-width: 2000px; /* Ancho máximo de la lista */
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centra los elementos de la lista */
+}
+
+/* Elementos de la lista de usuarios */
+#userList li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    padding: 15px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px; /* Limita el ancho de cada elemento */
 }
 

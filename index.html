@@ -18,17 +18,23 @@
             <ul>
                 <li><a href="index.html"class="nav-button">Inicio</a></li>
                 <li><a href="opciones.html"Class="nav-button">Etiquetas</a></li>
-                <li><a href="inventario.html"class="nav-button">Inventario de Repuestos</a></li>
-                <li><a href="calendario.html"class="nav-button">calendario</a></li>
-                <li><a href="login-signup.html" class="nav-button logout-button">Cerrar sesión</a></li>
+                <li><a href="inventario.html"class="nav-button">Stock</a></li>
+                <li><a href="calendario.html"class="nav-button">Calendario</a></li>
+                <li><a href="usuarios.html"class="nav-button">Usuarios</a></li>
+                <li><a href="login.html" class="nav-button logout-button">Cerrar sesión</a></li>
             </ul>
         </nav>
     </header>
 
     <main>
 
-        <section id="equipos">
+        <section id="addOptions">
             <h2>Lista de Equipos</h2>
+            <label for="searchInput"></label>
+            <input type="text" id="searchInput" placeholder="Buscar por nombre">
+
+        <section id="equipos">
+      
             <button id="addEquipmentBtn">Agregar Equipo</button>
             <table id="equipmentTable">
                 <thead>
@@ -42,6 +48,14 @@
                     <!-- Los equipos se agregarán aquí -->
                 </tbody>
             </table>
+            <div id="itemsContainer"></div>
+            <div class="pagination">
+                <button id="prevPageBtn" class="prev" disabled>Anterior</button>
+                <div id="pageNumbers"></div>
+                <button id="nextPageBtn" class="next" disabled>Siguiente</button>
+            </div>
+            <p id="pageInfo"></p>
+            
         </section>
 
         <section id="panelControl">

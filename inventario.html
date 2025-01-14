@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestión de Repuestos</title>
+    <title>Repuestos</title>
     <!-- icono -->
     <link rel="shortcut icon" href="img/logo.png">
     <link rel="stylesheet" href="css/styles.css">
@@ -12,16 +12,17 @@
     <header>
         <img src="img/logo.png" alt="Logo" id="headerLogo">
         <div class="header-content">
-            <h1>Gestión de Repuestos de Equipos</h1>
+            <h1>Repuestos para Equipos</h1>
         </div>
         <nav>
             <ul>
                 <ul>
                     <li><a href="index.html"class="nav-button">Inicio</a></li>
                     <li><a href="opciones.html"Class="nav-button">Etiquetas</a></li>
-                    <li><a href="inventario.html"class="nav-button">Inventario de Repuestos</a></li>
-                    <li><a href="calendario.html"class="nav-button">calendario</a></li>
-                    <li><a href="login-signup.html" class="nav-button logout-button">Cerrar sesión</a></li>
+                    <li><a href="inventario.html"class="nav-button">Stock</a></li>
+                    <li><a href="calendario.html"class="nav-button">Calendario</a></li>
+                    <li><a href="usuarios.html"class="nav-button">Usuarios</a></li>
+                    <li><a href="login.html" class="nav-button logout-button">Cerrar sesión</a></li>
                 </ul>
             </ul>
         </nav>
@@ -31,12 +32,12 @@
     <!--   busqueda -->   
     <section id="addOptions">
         <h2>Repuestos</h2>
-        <label for="searchInput">Buscar Opción:</label>
+        <label for="searchInput"></label>
         <input type="text" id="searchInput" placeholder="Buscar por nombre">
 
       <!--   inventario -->
         <section id="inventario">
-            <h2>Inventario de Repuestos</h2>
+
             <button id="addPartBtn">Agregar Repuesto</button>
             <table id="partsTable">
                 <thead>
@@ -71,21 +72,32 @@
         <span class="close" id="closeImageModal" style="cursor:pointer;">&times;</span>
         <img id="expandedImage" src="" alt="Imagen ampliada">
     </div>
-
+    
+	<main class="container"></main>
      <!-- Modal para agregar repuesto -->
      <div id="addPartModal" class="modal">
         <div class="modal-content">
-            <span class="close" id="closePartModal">&times;</span>
-            <h2>Agregar Repuesto</h2>
-            <label for="partPhoto">Foto del Repuesto (Cargar archivo):</label>
-            <input type="file" id="partPhoto" accept="image/*">
-            <label for="partName">Nombre del Repuesto:</label>
-            <input type="text" id="partName" placeholder="Nombre del repuesto" required>
-            <label for="partQuantity">Cantidad:</label>
-            <input type="number" id="partQuantity" placeholder="Cantidad" required>
-            <button id="submitPartBtn">Agregar Repuesto</button>
+        <span class="close" id="closePartModal">&times;</span>
+        <h2>Agregar Repuesto</h2>
+            <form id="addPartForm" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="action" value="add">
+                
+                <label for="partPhoto">Foto del Repuesto (Cargar archivo):</label>
+                <input type="file" id="partPhoto" name="foto" accept="image/*" required>
+                
+                <label for="partName">Nombre del Repuesto:</label>
+                <input type="text" id="partName" name="nombre" placeholder="Nombre del repuesto" required>
+                
+                <label for="partQuantity">Cantidad:</label>
+                <input type="number" id="partQuantity" name="cantidad" placeholder="Cantidad" required>
+                
+                <button type="submit" id="submitPartBtn">Agregar Repuesto</button>
+            </form>
         </div>
     </div>
+
+
+    
 
 </main>
     <footer>
@@ -95,4 +107,6 @@
     <script src="js/highlightNav.js" defer></script>
     <script src="js/inventario.js"></script>
 </body>
+
 </html>
+

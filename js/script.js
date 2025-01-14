@@ -7,7 +7,17 @@ document.addEventListener("DOMContentLoaded", () => {
         history: []
     };
 
+
+
+    
     // Modal y botón de agregar equipo
+    const searchInput = document.getElementById("searchInput");
+    const prevPageBtn = document.getElementById("prevPageBtn");
+    const nextPageBtn = document.getElementById("nextPageBtn");
+    const pageNumbers = document.getElementById("pageNumbers");
+    const pageInfo = document.getElementById("pageInfo");
+
+
     const addEquipmentModal = document.getElementById("addEquipmentModal");
     const submitEquipmentBtn = document.getElementById("submitEquipmentBtn");
     const closeEquipmentModal = document.getElementById("closeEquipmentModal");
@@ -26,6 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const closeEquipmentDetailsModal = document.getElementById("closeEquipmentDetailsModal");
 
     const viewHistoryBtn = document.getElementById("viewHistoryBtn");
+
 
 
     document.getElementById("addEquipmentBtn").addEventListener("click", () => {
@@ -111,6 +122,26 @@ document.addEventListener("DOMContentLoaded", () => {
                 <button class="button button-delete" onclick="deleteEquipment(this)">Eliminar</button>
             `;
 
+
+            // Guardar el equipo en localStorage
+            const equipmentData = {
+                photo: e.target.result,
+                name: equipmentName,
+                area: equipmentArea,
+                type: equipmentType,
+                subtype: equipmentSubtype,
+                brand: equipmentBrand,
+                serial: equipmentSerial,
+                model: equipmentModel,
+                manual: equipmentManual,
+                warrantyDate: equipmentWarrantyDate || "No aplica",
+                warrantyDays: equipmentWarrantyDays
+            };
+
+            const existingEquipment = JSON.parse(localStorage.getItem("equipment")) || [];
+            existingEquipment.push(equipmentData);
+            localStorage.setItem("equipment", JSON.stringify(existingEquipment));
+
                 addEquipmentModal.style.display = "none"; 
                 equipmentPhotoInput.value = "";
                 document.getElementById("equipmentName").value = "";
@@ -132,10 +163,23 @@ document.addEventListener("DOMContentLoaded", () => {
     window.deleteEquipment = function(button) {
         if (confirm("¿Estás seguro de que deseas eliminar este equipo?")) {
             const row = button.parentNode.parentNode;
+        
+            // Obtener el nombre del equipo que se va a eliminar
+            const equipmentName = row.cells[1].innerText;
+        
+            // Eliminar el equipo de la tabla
             row.parentNode.removeChild(row);
+        
+            // Eliminar el equipo de localStorage
+            let storedEquipments = JSON.parse(localStorage.getItem('equipment')) || []; // Usar 'equipment' en lugar de 'equipments'
+            storedEquipments = storedEquipments.filter(equipment => equipment.name !== equipmentName); // Filtrar por nombre de equipo
+            localStorage.setItem('equipment', JSON.stringify(storedEquipments)); // Guardar de nuevo en localStorage
+        
+            alert(`El equipo "${equipmentName}" ha sido eliminado.`);
         }
     };
 
+    
     // Mostrar los detalles del equipo
     window.showEquipmentDetails = function(button) {
         const row = button.parentNode.parentNode;
@@ -262,9 +306,26 @@ viewHistoryBtn.addEventListener("click", () => {
 
 
     // Actualiza las estadísticas de mantenimiento en el panel de control
-    function updateMaintenanceStats() {
-        document.querySelector("#upcomingMaintenanceCount span").innerText = maintenanceStats.upcoming;
-        document.querySelector("#overdueMaintenanceCount span").innerText = maintenanceStats.overdue;
+function updateMaintenanceStats() {
+    // Actualizamos la interfaz de usuario
+    document.querySelector("#upcomingMaintenanceCount span").innerText = maintenanceStats.upcoming;
+    document.querySelector("#overdueMaintenanceCount span").innerText = maintenanceStats.overdue;
+
+    // Guardamos las estadísticas en localStorage
+    const maintenanceStatsData = {
+        upcoming: maintenanceStats.upcoming,
+        overdue: maintenanceStats.overdue
+    };
+    localStorage.setItem('maintenanceStats', JSON.stringify(maintenanceStatsData));
+}
+
+    const storedStats = JSON.parse(localStorage.getItem('maintenanceStats'));
+    if (storedStats) {
+        maintenanceStats.upcoming = storedStats.upcoming;
+        maintenanceStats.overdue = storedStats.overdue;
+
+        // Actualizamos la interfaz con las estadísticas almacenadas
+        updateMaintenanceStats();
     }
 
     // Cerrar los modales al hacer clic fuera de ellos
@@ -285,6 +346,99 @@ viewHistoryBtn.addEventListener("click", () => {
     window.showImage = function(imgElement) {
         openImageModal(imgElement.src);
     };
+
+
+
+
+
+
+
+    let currentPage = 1;
+    const rowsPerPage = 2;  // Cantidad máxima de filas por página
+    
+    // Función para obtener los equipos y filtrarlos
+    function getFilteredEquipment() {
+        const searchText = searchInput.value.toLowerCase();
+        const rows = Array.from(equipmentTableBody.getElementsByTagName("tr"));
+        return rows.filter(row => row.cells[1].innerText.toLowerCase().includes(searchText));
+    }
+    
+    // Función para mostrar una página de resultados
+    function displayPage(pageNumber) {
+        const filteredRows = getFilteredEquipment();
+        const totalRows = filteredRows.length;
+        const totalPages = Math.ceil(totalRows / rowsPerPage);
+    
+        // Asegurarse de que la página no se salga de los límites
+        currentPage = Math.max(1, Math.min(pageNumber, totalPages));
+    
+        const start = (currentPage - 1) * rowsPerPage;
+        const end = start + rowsPerPage;
+    
+        // Ocultar todos los elementos y mostrar solo los de la página actual
+        Array.from(equipmentTableBody.getElementsByTagName("tr")).forEach(row => row.style.display = "none");
+    
+        // Mostrar solo las filas que corresponden a la página actual
+        filteredRows.slice(start, end).forEach(row => row.style.display = "");
+    
+        // Actualizar la información de la página actual
+        pageInfo.textContent = `Página ${currentPage} de ${totalPages}`;
+    
+        // Habilitar o deshabilitar los botones de paginación
+        prevPageBtn.disabled = currentPage === 1;
+        
+        // Condición adicional para habilitar el botón "Siguiente" si el total de filas es menor o igual a rowsPerPage
+        nextPageBtn.disabled = totalRows <= rowsPerPage ? false : currentPage === totalPages;
+    }
+    
+    // Eventos para los botones de paginación
+    prevPageBtn.addEventListener("click", () => {
+        displayPage(currentPage - 1);
+    });
+    
+    nextPageBtn.addEventListener("click", () => {
+        displayPage(currentPage + 1);
+    });
+    
+    // Evento de búsqueda
+    searchInput.addEventListener("input", () => {
+        displayPage(1); // Reiniciar a la primera página cuando se realiza una búsqueda
+    });
+    
+    // Mostrar la primera página cuando se carga el contenido
+    displayPage(1);
+
+
+
+
+    // Cargar equipos desde localStorage
+    const equipmentData = JSON.parse(localStorage.getItem("equipment")) || [];
+    equipmentData.forEach(equipment => {
+        const row = equipmentTableBody.insertRow();
+        const photoCell = row.insertCell(0);
+        const nameCell = row.insertCell(1);
+        const actionsCell = row.insertCell(2);
+
+        // Asignar datos a la fila usando dataset
+        row.dataset.area = equipment.area;
+        row.dataset.type = equipment.type;
+        row.dataset.subType = equipment.subtype;
+        row.dataset.brand = equipment.brand;
+        row.dataset.serial = equipment.serial;
+        row.dataset.model = equipment.model;
+        row.dataset.manual = equipment.manual;
+        row.dataset.warrantyDate = equipment.warrantyDate;
+        row.dataset.warrantyDays = equipment.warrantyDays;
+
+        photoCell.innerHTML = `<img src="${equipment.photo}" alt="${equipment.name}" width="50" height="50" onclick="showImage(this)">`;
+        nameCell.innerText = equipment.name;
+
+        actionsCell.innerHTML = `
+            <button class="button button-view" onclick="showEquipmentDetails(this)">Ver detalles</button>
+            <button class="button button-maintenance" onclick="showMaintenanceForm(this)">Mantenimiento</button>
+            <button class="button button-delete" onclick="deleteEquipment(this)">Eliminar</button>
+        `;
+    });
 });
 
 // Función para llenar los selectores de área, tipo y subtipo
@@ -334,3 +488,6 @@ function mostrarCampoTexto() {
         otraOperacionInput.value = ""; // Limpiar el campo de texto si no es "Otro"
     }
 }
+
+
+
